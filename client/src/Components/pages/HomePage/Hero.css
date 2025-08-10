@@ -6,15 +6,16 @@
     align-items: center;
     text-align: center;
     color: white;
+    padding: 0 1rem;
 }
 
 .hero-content h1{
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     margin-bottom: 0.5rem;
 }
 
 .hero-subtitle{
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: 300;
     margin-bottom: 2rem;
 }
@@ -34,4 +35,18 @@
 .hero-button:hover{
     transform: translateY(-3px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* For Phones */
+
+@media(max-width: 768px){
+    .hero-content h1{
+        font-size: 2.5rem;
+    }
+    .hero-subtitle{
+        font-size: 1.2rem;
+    }
+    .hero{
+        padding: 0 1rem;
+    }
 }

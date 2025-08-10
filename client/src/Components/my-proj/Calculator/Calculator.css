@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+.calculator-page-wrapper{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+    font-family: 'Poppins', sans-serif;
+}
+
+.calculator-grid{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 20px;
+}
+
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 10px;
+    margin: 5px;
+    transition: background-color 0.2s;
+}
+
+.calculator-grid > button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.calculator-grid > button:active {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.span-two{
+    grid-column: span 2;
+}
+
+.output{
+    grid-column: 1 / -1;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.previous-operand{
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.5rem;
+}
+
+.current-operand{
+    color: white;
+    font-size: 2.5rem;
+    transition: font-size 0.1s ease-in-out;
+    white-space: nowrap;
+    text-align: right;
+    width: 100%;
+}
+
+.back-link{
+    margin-top: 2rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background-color 0.2s;
+}
+
+.back-link:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}

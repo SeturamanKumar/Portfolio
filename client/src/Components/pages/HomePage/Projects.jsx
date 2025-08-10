@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import './Projects.css';
 
 function Projects() {
@@ -18,10 +19,12 @@ function Projects() {
                 <h2 className="projects-title">My Projects</h2>
                 <div className="project-list">
                     {projects.map(project => (
+                        <Link to={`/project/${project.slug}`} key={project._id} className="project-link">
                         <div key={project.id} className="project-card">
                             <h3>{project.title}</h3>
                             <p>{project.description}</p>
                         </div>
+                        </Link>
                     ))}
                 </div>
             </div>

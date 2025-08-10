@@ -46,3 +46,8 @@
     line-height: 1.6;
     color: #555;
 }
+
+.project-link{
+    text-decoration: none;
+    color: inherit;
+}

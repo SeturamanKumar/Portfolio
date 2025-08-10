@@ -1,0 +1,109 @@
+    .dropdown-nav-page-wrapper{
+        width: 100%;
+        min-height: 100vh;
+        background-color: #f0f2f5;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .dropdown-navbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+        height: 70px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-navbar-logo a{
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #333;
+        text-decoration: none;
+    }
+
+    .dropdown-nav-links{
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .dropdown-nav-links > li{
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown-nav-links a, .dropdown-toggle{
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 1.5rem;
+        color: #555;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .dropdown-nav-links a:hover{
+        background-color: #f0f2f5;
+        color: #333;
+    }
+
+    .dropdown-item{
+        position: relative;
+        padding-bottom: 5px;
+    }
+
+    .dropdown-toggle{
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    .dropdown-toggle span{
+        margin-left: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .dropdown-menu{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        list-style: none;
+        padding: 0.5rem 0;
+        margin-top: 5px;
+        width: 200px;
+        z-index: 100;
+
+        opacity: 0;
+        transform: translateY(-10px);
+        visibility: hidden;
+
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+
+    .dropdown-menu.open{
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .dropdown-menu li a{
+        display: block;
+        padding: 0.75rem 1.5rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .dropdown-page-content{
+        padding: 4rem 2rem;
+        text-align: center;
+    }
