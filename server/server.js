@@ -8,7 +8,9 @@ let Project = require('./models/project.model.js');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://seturaman-portfolio-frontend.vercel.app'
+}));
 app.use(express.json());
 
 const uri = process.env.MONGO_URI;
