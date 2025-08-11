@@ -8,7 +8,7 @@ function AdminDashboard(){
     const navigate = useNavigate();
 
     const fetchProjects = () => {
-        fetch('http://localhost:5001/api/projects')
+        fetch(`${process.env.REACT_APP_API_URL}/api/projects`)
             .then(res => res.json())
             .then(data => setProjects(data))
             .catch(error => console.error("Error fetching projects: ", error));        
@@ -20,7 +20,7 @@ function AdminDashboard(){
 
     const handleDelete = (projectId) => {
         if(window.confirm('Are you sure you want to delete this project?')){
-            fetch(`http://localhost:5001/api/projects/${projectId}`, {
+            fetch(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`, {
                 method: 'DELETE',
             })
             .then(res => res.json())

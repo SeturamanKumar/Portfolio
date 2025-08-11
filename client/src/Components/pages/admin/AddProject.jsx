@@ -22,7 +22,7 @@ function AddProject() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('http://localhost:5001/api/projects', {
+        fetch(`${process.env.REACT_APP_API_URL}/api/projects`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

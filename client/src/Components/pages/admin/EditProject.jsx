@@ -13,7 +13,7 @@ function EditProject() {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:5001/api/projects/${projectId}`)
+        fetch(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`)
             .then(res => res.json())
             .then(data => {
                 setProjectData({
@@ -36,7 +36,7 @@ function EditProject() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:5001/api/projects/${projectId}`, {
+        fetch(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
