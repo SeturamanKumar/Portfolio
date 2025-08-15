@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
 
 let Project = require('./models/project.model.js');
 
@@ -16,6 +15,7 @@ app.use(cors({
             const msg = 'The CORS policy for this website does not allow acces from the specified Origin'
             return callback(new Error(msg), false);
         }
+        return callback(null, true);
     }
 }));
 app.use(express.json());
@@ -33,7 +33,10 @@ app.use('/api/users', userRouter);
 
 app.get('/api/projects', (req, res) => {
     Project.find()
-        .then(projects => res.json(projects))
+        .then(projects => {
+            res.setHeader('Content-Type', 'application/json');
+            res.json(projects);
+        })
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
