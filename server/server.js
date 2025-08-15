@@ -8,8 +8,15 @@ let Project = require('./models/project.model.js');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
 app.use(cors({
-    origin: 'https://seturaman-portfolio-frontend.vercel.app'
+    origin: function(origin, callback){
+        if(!origin) { return callback(null, true); }
+        if(allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this website does not allow acces from the specified Origin'
+            return callback(new Error(msg), false);
+        }
+    }
 }));
 app.use(express.json());
 
