@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 
-function Navbar() {
+function Navbar(): React.JSX.Element {
   return (
     <nav className="navbar">
       <h2 className="navbar-logo">MyPortfolio</h2>

@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
-function LoginPage() {
+function LoginPage(): React.JSX.Element {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
     
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setError(null);
 
@@ -52,7 +52,7 @@ function LoginPage() {
                         id="username" 
                         name="username" 
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                         required />
                     </div>
                     <div className="form-group">
@@ -62,7 +62,7 @@ function LoginPage() {
                         id="password" 
                         name="password" 
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                         required />
                     </div>
                     <button type="submit" className="btn-auth">Login</button>

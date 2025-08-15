@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
-function EditProject() {
+interface ProjectFormData {
+    title: string;
+    description: string;
+    slug: string;
+}
+
+function EditProject(): React.JSX.Element {
 
     const { projectId } = useParams();
     const navigate = useNavigate();
 
-    const [projectData, setProjectData] = useState({
+    const [projectData, setProjectData] = useState<ProjectFormData>({
         title: '',
         description: '',
         slug: '',
@@ -15,7 +21,7 @@ function EditProject() {
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`)
             .then(res => res.json())
-            .then(data => {
+            .then((data: ProjectFormData) => {
                 setProjectData({
                     title: data.title,
                     description: data.description,
@@ -25,7 +31,7 @@ function EditProject() {
             .catch(error => console.error("Error fetching project:", error));
     }, [projectId])
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setProjectData(prevData => ({
             ...prevData,
@@ -33,7 +39,7 @@ function EditProject() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         fetch(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`, {
@@ -71,7 +77,7 @@ function EditProject() {
                         <textarea
                             id="description"
                             name="description"
-                            rows='5'
+                            rows={5}
                             value={projectData.description}
                             onChange={handleChange}
                         ></textarea>

@@ -1,7 +1,7 @@
 import React from "react";
 import './Hero.css';
 
-function Hero(){
+function Hero(): React.JSX.Element {
 
     return(
         <section id="hero" className="hero">

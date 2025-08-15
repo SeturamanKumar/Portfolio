@@ -1,7 +1,7 @@
 import React from "react";
 import './Footer.css';
 
-function Footer(){
+function Footer(): React.JSX.Element {
     return(
         <footer className="footer">
             <p>&copy; {new Date().getFullYear()} Seturaman Kumar. All rights reserved.</p>
@@ -9,4 +9,4 @@ function Footer(){
     )
 }
 
-export default Footer
+export default Footer;

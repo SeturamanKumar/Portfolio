@@ -2,15 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './AdminDashboard.css';
 
-function AdminDashboard(){
+interface Project {
+    _id: string;
+    title: string;
+    description: string;
+    slug: string;
+}
 
-    const [projects, setProjects] = useState([]);
+function AdminDashboard(): React.JSX.Element {
+
+    const [projects, setProjects] = useState<Project[]>([]);
     const navigate = useNavigate();
 
     const fetchProjects = () => {
         fetch(`${process.env.REACT_APP_API_URL}/api/projects`)
             .then(res => res.json())
-            .then(data => setProjects(data))
+            .then((data: Project[]) => setProjects(data))
             .catch(error => console.error("Error fetching projects: ", error));        
     }
 
@@ -18,18 +25,16 @@ function AdminDashboard(){
         fetchProjects();
     }, []);
 
-    const handleDelete = (projectId) => {
-        if(window.confirm('Are you sure you want to delete this project?')){
-            fetch(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`, {
-                method: 'DELETE',
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.message);
-                setProjects(projects.filter(project => project._id !== projectId));
-            })
-            .catch(error => console.error('Error deleting project:', error));
-        }
+    const handleDelete = (projectId: string) => {
+        fetch(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`, {
+            method: 'DELETE',
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.message);
+            setProjects(currentProjects => currentProjects.filter(project => project._id !== projectId));
+        })
+        .catch(error => console.error('Error deleting project:', error));
     };
 
     const handleLogout = () => {

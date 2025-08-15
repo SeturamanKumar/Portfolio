@@ -1,7 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import { useParams } from "react-router-dom";
+import EmbeddedProjectPage from './EmbeddedProjectPage';
 
-const projectComponentMap = {
+const projectComponentMap: { [key: string]: React.LazyExoticComponent<React.ComponentType<any>>} = { 
     'calculator': lazy(() => import('../my-proj/Calculator/Calculator.jsx')),
     'stopwatch': lazy(() => import('../my-proj/Stopwatch/Stopwatch.jsx')),
     'dropdown-nav': lazy(() => import('../my-proj/DropdownNav/DropdownNav.jsx')),
@@ -10,13 +11,23 @@ const projectComponentMap = {
     'to-do-list': lazy(() => import('../my-proj/ToDoList/ToDoList.jsx'))
 };
 
-function ProjectPage() {
+type ProjectParams = {
+    projectSlug: string;
+};
 
-    const { projectSlug } = useParams();
+const embeddedProjectSlugs = [
+    'image-gallery'
+]
 
-    console.log("Slug from URL:", projectSlug);
+function ProjectPage(): React.JSX.Element {
 
-    const ProjectComponent = projectComponentMap[projectSlug];
+    const { projectSlug } = useParams<ProjectParams>();
+
+    if(projectSlug && embeddedProjectSlugs.includes(projectSlug)){
+        return <EmbeddedProjectPage projectSlug={projectSlug} />
+    }
+
+    const ProjectComponent = projectSlug ? projectComponentMap[projectSlug] : null;
 
     return(
         <div>

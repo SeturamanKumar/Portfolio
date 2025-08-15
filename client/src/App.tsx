@@ -1,23 +1,23 @@
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import ProtectedRoutes from './Components/pages/auth/ProtectedRoutes.jsx';
+import ProtectedRoutes from './Components/pages/auth/ProtectedRoutes';
 
-import ProjectPage from './Components/pages/ProjectPage.jsx';
-import AdminDashboard from './Components/pages/admin/AdminDashboard.jsx';
-import EditProject from './Components/pages/admin/EditProject.jsx';
-import AddProject from './Components/pages/admin/AddProject.jsx';
-import LoginPage from './Components/pages/auth/LoginPage.jsx';
+import ProjectPage from './Components/pages/ProjectPage';
+import AdminDashboard from './Components/pages/admin/AdminDashboard';
+import EditProject from './Components/pages/admin/EditProject';
+import AddProject from './Components/pages/admin/AddProject';
+import LoginPage from './Components/pages/auth/LoginPage';
 
 // Layout components import
-import Navbar from './Components/pages/HomePage/Navbar.jsx';
-import Projects from './Components/pages/HomePage/Projects.jsx';
-import Hero from './Components/pages/HomePage/Hero.jsx';
-import Footer from './Components/pages/HomePage/Footer.jsx';
-import Contact from './Components/pages/HomePage/Contact.jsx';
+import Navbar from './Components/pages/HomePage/Navbar';
+import Projects from './Components/pages/HomePage/Projects';
+import Hero from './Components/pages/HomePage/Hero';
+import Footer from './Components/pages/HomePage/Footer';
+import Contact from './Components/pages/HomePage/Contact';
 
-function MainLayout() {
+function MainLayout(): React.JSX.Element {
 
   return(
     <>
@@ -31,7 +31,7 @@ function MainLayout() {
   
 }
 
-function App(){
+function App(): React.JSX.Element {
 
   return(
     <div className='App'>

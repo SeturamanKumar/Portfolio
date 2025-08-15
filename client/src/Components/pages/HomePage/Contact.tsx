@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import './Contact.css';
 
-function Contact(){
+function Contact(): React.JSX.Element {
     
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
-    const [confirmation, setConfirmation] = useState('');
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
+    const [confirmation, setConfirmation] = useState<string>('');
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         
         const formData = { name, email, message};
@@ -42,9 +42,9 @@ function Contact(){
             <div className="contact-container">
                 <h2 className="contact-title">Contact Me</h2>
                 <form onSubmit={handleSubmit} className="contact-form">
-                    <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} required />
-                    <input type="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    <textarea placeholder="Your Message" rows='7' value={message} onChange={(e) => setMessage(e.target.value)} required></textarea>
+                    <input type="text" placeholder="Your Name" value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} required />
+                    <input type="email" placeholder="Your Email" value={email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} required />
+                    <textarea placeholder="Your Message" rows={7} value={message} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)} required></textarea>
                     <button type="submit">Send Message</button>
                 </form>
                 {confirmation && <p className="confirmation-message">{confirmation}</p>}

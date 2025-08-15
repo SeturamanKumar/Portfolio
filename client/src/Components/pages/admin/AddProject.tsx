@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function AddProject() {
+interface ProjectFormData {
+    title: string;
+    description: string;
+    slug: string;
+}
+
+function AddProject(): React.JSX.Element {
 
     const navigate = useNavigate();
 
-    const [projectData, setProjectData] = useState({
+    const [projectData, setProjectData] = useState<ProjectFormData>({
         title: '',
         description: '',
         slug: '',
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setProjectData(prevData => ({
             ...prevData,
@@ -19,7 +25,7 @@ function AddProject() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         fetch(`${process.env.REACT_APP_API_URL}/api/projects`, {
@@ -50,7 +56,7 @@ function AddProject() {
                         name="title"
                         value={projectData.title}
                         onChange={handleChange}
-                        requires 
+                        required
                         />
                     </div>
                     <div className="form-group">
@@ -58,7 +64,7 @@ function AddProject() {
                         <textarea
                         id="description"
                         name="description"
-                        rows="5"
+                        rows={5}
                         value={projectData.description}
                         onChange={handleChange}
                         required
