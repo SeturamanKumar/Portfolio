@@ -5,6 +5,7 @@ interface ProjectFormData {
     title: string;
     description: string;
     slug: string;
+    language: string;
 }
 
 function EditProject(): React.JSX.Element {
@@ -16,6 +17,7 @@ function EditProject(): React.JSX.Element {
         title: '',
         description: '',
         slug: '',
+        language: '',
     });
 
     useEffect(() => {
@@ -26,6 +28,7 @@ function EditProject(): React.JSX.Element {
                     title: data.title,
                     description: data.description,
                     slug: data.slug,
+                    language: data.language || '',
                 })
             })
             .catch(error => console.error("Error fetching project:", error));
@@ -91,6 +94,15 @@ function EditProject(): React.JSX.Element {
                             value={projectData.slug}
                             onChange={handleChange}
                         />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="language">Language/Framework</label>
+                        <input 
+                        type="text"
+                        id="language"
+                        name="language"
+                        value={projectData.language}
+                        onChange={handleChange} />
                     </div>
                     <div className="form-actions">
                         <button type="submit" className="btn btn-edit">Save Changes</button>

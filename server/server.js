@@ -47,12 +47,13 @@ app.get('/api/projects/:id', (req, res) => {
 });
 
 app.post('/api/projects', (req, res) => {
-    const { title, description, slug } = req.body;
+    const { title, description, slug, language } = req.body;
 
     const newProject = new Project({
         title,
         description,
         slug,
+        language,
     });
 
     newProject.save()

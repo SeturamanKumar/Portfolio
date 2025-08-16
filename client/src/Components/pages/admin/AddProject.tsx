@@ -5,6 +5,7 @@ interface ProjectFormData {
     title: string;
     description: string;
     slug: string;
+    language: string;
 }
 
 function AddProject(): React.JSX.Element {
@@ -15,6 +16,7 @@ function AddProject(): React.JSX.Element {
         title: '',
         description: '',
         slug: '',
+        language: '',
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -80,6 +82,16 @@ function AddProject(): React.JSX.Element {
                         onChange={handleChange}
                         required
                         />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="language">Language/Framework</label>
+                        <input 
+                            type="text"
+                            id="language"
+                            name="language"
+                            value={projectData.language}
+                            onChange={handleChange}
+                            required />
                     </div>
                     <div className="form-actions">
                         <button type="submit" className="btn btn-add">Add project</button>

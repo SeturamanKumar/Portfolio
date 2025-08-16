@@ -7,11 +7,13 @@ interface Project {
   title: string;
   description: string;
   slug: string;
+  language: string;
 }
 
 function Projects(): React.JSX.Element {
     const [projects, setProjects] = useState<Project[]>([]);
     const [loadingMessage, setLoadingMessage] = useState("Loading projects...");
+    const [selectedLanguage, setSelectedLanguage] = useState<string>('All');
 
     useEffect(() => {
 
@@ -33,29 +35,45 @@ function Projects(): React.JSX.Element {
                     setLoadingMessage("No Projects Have Been Added Yet.");
                 }
                 setProjects(data);
+                return data;
 
             } catch (error) {
                 console.error('An Error Occured During The Fetch Operation:', error);
                 setLoadingMessage('Error: Could Not Connect to The Server');
+                return;
             }
 
         };
-
+        
         fetchProjects();
 
     }, []);
+    
+    const languages = ['All', ...Array.from(new Set(projects.map(p => p.language)))];
+    const filteredProjects = selectedLanguage === 'All' ? projects : projects.filter(project => project.language === selectedLanguage)
 
     return(
         <section id="projects" className="projects">
             <div className="projects-container">
                 <h2 className="projects-title">My Projects</h2>
+                <div className="filter-container">
+                    {languages.map(lang => (
+                        <button
+                            key={lang}
+                            className={`filter-btn ${selectedLanguage === lang ? 'active' : ''}`}
+                            onClick={() => setSelectedLanguage(lang)}>
+                            {lang}
+                        </button>
+                    ))}
+                </div>
                 <div className="project-list">
-                    {projects.length > 0 ? (
-                        projects.map(project => (
+                    {filteredProjects.length > 0 ? (
+                        filteredProjects.map(project => (
                             <Link to={`/project/${project.slug}`} key={project._id} className="project-link">
                                 <div className="project-card">
                                     <h3>{project.title}</h3>
                                     <p>{project.description}</p>
+                                    <span className="project-language">{project.language}</span>
                                 </div>
                             </Link>
                         ))
