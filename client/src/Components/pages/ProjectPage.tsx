@@ -16,7 +16,8 @@ type ProjectParams = {
 };
 
 const embeddedProjectSlugs = [
-    'image-gallery'
+    'image-gallery',
+    'github-finder',
 ]
 
 function ProjectPage(): React.JSX.Element {
