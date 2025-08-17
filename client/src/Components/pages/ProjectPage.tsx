@@ -18,6 +18,7 @@ type ProjectParams = {
 const embeddedProjectSlugs = [
     'image-gallery',
     'github-finder',
+    'quiz-app',
 ]
 
 function ProjectPage(): React.JSX.Element {

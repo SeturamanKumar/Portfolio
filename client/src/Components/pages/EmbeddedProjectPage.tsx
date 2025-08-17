@@ -9,6 +9,7 @@ interface EmbeddedProjectProps {
 const projectUrls: { [key:string]: string } = {
     'image-gallery': 'https://seturamankumar.github.io/portfolio-sub-image-gallery/',
     'github-finder': 'https://github-finder-black-nine.vercel.app/',
+    'quiz-app': 'https://quiz-app-rho-drab-96.vercel.app/',
 }
 
 function EmbeddedProjectPage({ projectSlug }: EmbeddedProjectProps): React.JSX.Element {
