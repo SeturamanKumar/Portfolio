@@ -3,35 +3,34 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 let User = require('../models/user.model.js');
 
+const REGISTRATION_KEY = process.env.YOUR_SECRET_REGISTRATION_KEY || 'Chintu-Chapak-The-Chin-Tapak-Dum-Dum-King'
+
 router.post('/register', async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username, password, registrationKey } = req.body;
         
-        if(!username || !password){
-            return res.status(400).json({ msg: 'Please enter all fields.' });
-        }
-        if(password.length < 6){
-            return res.status(400).json({ msg: 'Password must be at least 6 characters long.' });
+        if(REGISTRATION_KEY !== REGISTRATION_KEY){
+            return res.status(403). json({ message: 'Invalid Registration Key.' });
         }
 
-        const existingUser = await User.findOne({ username: username });
+        const existingUser = await User.findOne({ username });
         if(existingUser){
-            return res.status(400).json({ msg: 'An account with this username already exists.' });
+            return res.status(400).json({ message: 'Username Already Exists.' });
         }
 
         const salt = await bcrypt.genSalt(10);
-        const passwordHash = await bcrypt.hash(password, salt);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = new User({
-            username, 
-            password: passwordHash,
+            username,
+            password: hashedPassword,
         });
 
         const savedUser = await newUser.save();
-        res.json(savedUser);
+        res.status(201).json({ message: 'User Registered Successfully!', user: { id: savedUser._id, username: savedUser.username }});
 
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ message: 'Server Error', error: err.message });
     }
 });
 
