@@ -31,11 +31,28 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 350px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover{
     transform: translateY(-5px);
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+}
+
+.project-image-placeholder{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    background-color: #eee;
+}
+
+.project-info{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card h3{
@@ -48,6 +65,7 @@
     font-size: 1rem;
     line-height: 1.6;
     color: #555;
+    flex-grow: 1;
 }
 
 .project-link{
@@ -73,10 +91,10 @@
     margin-bottom: 1rem;
 }
 
-.filter-btn.active{
+.fliter-btn:active{
     background: #764ba2;
     color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 10px rgba(0 , 0, 0, 0.15);
 }
 
 .filter-btn:not(.active):hover{
@@ -91,5 +109,24 @@
     display: inline-block;
     font-size: 0.8rem;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     padding: 0.3rem 0.8rem;
+}
+
+.project-card-links{
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.project-card-links a{
+    color: #764ba2;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.project-card-links a:hover{
+    color: #5a3a7f;
+    text-decoration: underline;
 }
