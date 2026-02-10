@@ -1,0 +1,25 @@
+:root {
+  --bg-color: #111;
+  --text-color: #eee;
+  --sidebar-bg: #000;
+  --sidebar-border: #333;
+  --accent-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
