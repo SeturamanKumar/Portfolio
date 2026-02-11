@@ -1,17 +1,30 @@
 .container {
+    --bg-color: #111;
+    --text-primary: #ededed;
+    --text-secondary: #888;
+
     display: flex;
     flex-direction: row;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
     background-color: var(--bg-color);
+    color: var(--text-primary);
 }
 
 .main{
     flex: 1;
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
-    padding: 40px;
     position: relative;
+    padding: 16px 64px 48px 64px;
+}
+
+.content {
+    width: 100%;
+    max-width: 672px;
+    margin: 0 auto;
 }
 
 @media (max-width: 768px) {
@@ -20,6 +33,6 @@
     }
 
     .main {
-        padding: 20px;
+        padding: 0 64px 48px 80px;
     }
 }

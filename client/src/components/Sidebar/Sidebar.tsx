@@ -17,7 +17,6 @@ export default function Sidebar() {
     
     return(
         <aside className={styles.sidebar}>
-            <div className={styles.logo}>Seturaman</div>
             <nav className={styles.nav}>
                 {
                     navItems.map((item) => {

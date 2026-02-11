@@ -1,7 +1,9 @@
+import ProjectsMe from "@/components/ProjectsMe/ProjectsMe"
+
 export default function Projects(){
     return(
-        <div>
-            <h1>My Projects</h1>
-        </div>
+        <main>
+            <ProjectsMe />
+        </main>
     )
 }

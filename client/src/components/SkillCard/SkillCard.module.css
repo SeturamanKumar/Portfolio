@@ -1,0 +1,44 @@
+.card {
+    display: flex;
+    align-items: center;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 240px;
+}
+
+.card:hover {
+    border-color: #555;
+    transform: translateY(-2px);
+    background-color: #151515;
+}
+
+.iconContainer {
+    width: 44px;
+    height: 44px;
+    background-color: #4d4d4d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #333;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.name {
+    flex: 1;
+    padding-left: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ededed;
+}

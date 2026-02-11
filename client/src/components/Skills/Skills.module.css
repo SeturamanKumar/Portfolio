@@ -1,0 +1,44 @@
+.section {
+    padding: 2rem 0 4rem 0;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(200, 1fr));
+    gap: 1rem;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.expandButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid #333;
+    color: #888;
+    padding: 10px 24px;
+    border-radius: 99px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.expandButton:hover {
+    background-color: #222;
+    color: #fff;
+    border-color: #555;
+}

@@ -1,0 +1,20 @@
+# --- Global Ignores (Applies to everything) ---
+node_modules/
+.DS_Store
+.env
+.vscode/
+.idea/
+*.log
+
+# --- Server Specific ---
+# Even if server doesn't have its own gitignore, this covers it
+server/node_modules/
+server/dist/
+server/.env
+
+# --- Client Specific ---
+# (Redundant if client has its own file, but safe to keep here)
+client/node_modules/
+client/.next/
+client/out/
+client/build/
