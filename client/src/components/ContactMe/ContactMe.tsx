@@ -54,7 +54,7 @@ export default function ContactMe() {
                     <input type="email" id="email" name="email" placeholder="yourname@example.com" required className={styles.input}/>
                 </div>
                 <div className={styles.inputGroup}>
-                    <label htmlFor="message" className={styles.label}>Email</label>
+                    <label htmlFor="message" className={styles.label}>Message</label>
                     <textarea id="message" name="message" placeholder="Hello, let's discuss something..." required className={styles.textarea}/>
                 </div>
                 <button type="submit" className={styles.sendButton}>Send Message</button>
