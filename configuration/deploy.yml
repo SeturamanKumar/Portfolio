@@ -1,0 +1,64 @@
+---
+- name: Deploy Django Application
+  hosts: webservers
+  become: yes
+  remote_user: azureuser
+
+  vars_files:
+    - vars/secrets.yml
+
+  vars:
+    repo_url: "https://github.com/SeturamanKumar/Portfolio.git"
+    project_dir: "/var/www/portfolio"
+    app_dir: "{{ project_dir }}/server"
+    venv_dir: "{{ app_dir }}/venv"
+
+  tasks:
+    - name: Create project directory
+      file:
+        path: "{{ project_dir }}"
+        state: directory
+        owner: azureuser
+        group: azureuser
+        mode: '0755'
+
+    - name: Pull latest code from GitHub
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ project_dir }}"
+        version: main
+        force: yes
+      become_user: azureuser
+
+    - name: Create virtual enviornment manully
+      command: python3 -m venv "{{ venv_dir }}"
+      args:
+        creates: "{{ venv_dir }}/bin/activate"
+      become_user: azureuser
+
+    - name: Install dependencies from requirments.txt
+      pip:
+        requirements: "{{ app_dir }}/requirments.txt"
+        virtualenv: "{{ venv_dir }}"
+      become_user: azureuser
+
+    - name: Create empty .env file if missing
+      file:
+        path: "{{ app_dir }}/.env"
+        state: touch
+        owner: azureuser
+        group: azureuser
+        mode: '0600'
+
+    - name: Create .env file with secrets
+      copy:
+        dest: "{{ app_dir }}/.env"
+        content: |
+          SECRET_KEY={{ env_secret_key }}
+          DEBUG={{ env_debug }}
+          ALLOWED_HOSTS={{ env_allowed_hosts }}
+          EMAIL_HOST_USER={{ env_email_host_user }}
+          EMAIL_HOST_PASSWORD={{ env_email_host_password }}
+        owner: azureuser
+        group: azureuser
+        mode: '0600'

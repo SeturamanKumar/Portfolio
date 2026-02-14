@@ -1,0 +1,27 @@
+---
+- name: Setup Portfolio Server
+  hosts: webservers
+  become: yes
+  remote_user: azureuser
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+    
+    - name: Instal basic dependencies
+      apt:
+        name: 
+         - git
+         - python3-pip
+         - python3-venv
+         - nginx
+         - curl
+        state: present
+
+    - name: Ensure Nginx is Running
+      service:
+        name: nginx
+        state: started
+        enabled: yes

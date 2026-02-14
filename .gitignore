@@ -12,6 +12,10 @@ node_modules/
 server/node_modules/
 server/dist/
 server/.env
+server/__pycache__
+server/venv/
+server/*.py[cod]
+server/db.sqlite3
 
 # --- Client Specific ---
 # (Redundant if client has its own file, but safe to keep here)
@@ -24,3 +28,18 @@ venv/
 __pycache__/
 *.pyc
 db.sqlite3
+
+
+configuration/hosts.ini
+configuration/*.retry
+configuration/.vault_pass
+configuration/vars/secrets.yml
+
+infrastructure/.terraform/
+infrastructure/.terraform.lock.hcl
+infrastructure/*.tfvars
+infrastructure/*.tfvars.json
+infrastructure/terraform.tfstate
+
+terraform/*.tfstate
+terraform/*.tfstate.backup
