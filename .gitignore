@@ -5,6 +5,7 @@ node_modules/
 .vscode/
 .idea/
 *.log
+.env.local
 
 # --- Server Specific ---
 # Even if server doesn't have its own gitignore, this covers it
@@ -18,3 +19,8 @@ client/node_modules/
 client/.next/
 client/out/
 client/build/
+
+venv/
+__pycache__/
+*.pyc
+db.sqlite3

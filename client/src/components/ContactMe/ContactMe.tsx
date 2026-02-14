@@ -1,12 +1,56 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import styles from "./ContactMe.module.css";
-
+    
 export default function ContactMe() {
+
+    const [status, setStatus] = useState<string | null>(null);
+    const [formData, setFormData] = useState({name: '', email: '', message: ''});
+    
+    useEffect(() => {
+        if(status === 'success' || status === 'error') {
+            const timer = setTimeout(() => (
+                setStatus(null)
+            ), 3000);
+            return () => {
+                clearTimeout(timer);
+            }
+        }
+    }, [status])
+
+    async function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log("Form Submitted");
+        setStatus('loading');
+        try {
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+            const response = await fetch(`/api/contact/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if(response.ok) {
+                setStatus('success');
+                setFormData({ name: '', email: '', message: '' });
+            } else {
+                setStatus('error');
+            }
+        } 
+        catch(e) {
+            console.error('Error', e);
+            setStatus('error');
+        }
     }
 
     return(
@@ -47,18 +91,37 @@ export default function ContactMe() {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.inputGroup}>
                     <label htmlFor="name" className={styles.label}>Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your Name" required className={styles.input}/>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required className={styles.input} value={formData.name} onChange={handleChange}/>
                 </div>
                 <div className={styles.inputGroup}>
                     <label htmlFor="email" className={styles.label}>Email</label>
-                    <input type="email" id="email" name="email" placeholder="yourname@example.com" required className={styles.input}/>
+                    <input type="email" id="email" name="email" placeholder="yourname@example.com" required className={styles.input} value={formData.email} onChange={handleChange}/>
                 </div>
                 <div className={styles.inputGroup}>
                     <label htmlFor="message" className={styles.label}>Message</label>
-                    <textarea id="message" name="message" placeholder="Hello, let's discuss something..." required className={styles.textarea}/>
+                    <textarea id="message" name="message" placeholder="Hello, let's discuss something..." required className={styles.textarea} value={formData.message} onChange={handleChange}/>
                 </div>
-                <button type="submit" className={styles.sendButton}>Send Message</button>
+                <button type="submit" className={styles.sendButton} disabled={status === 'loading'}>
+                    {status === 'loading' ? 'Sending...' : 'Send Message'}
+                </button>
             </form>
+            {
+                status === 'success' && (
+                    <div className={`${styles.toast} ${styles.success} ${styles.slideOut}`}>
+                        <span>✅</span>
+                        Message Sent Successfully
+                    </div>
+                )
+            }
+
+            {
+                status === 'error' && (
+                    <div className={`${styles.toast} ${styles.error} ${styles.slideOut}`}>
+                        <span>❌</span>
+                        Something Went Wrong
+                    </div>
+                )
+            }
         </section>
     )
 
