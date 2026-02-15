@@ -10,7 +10,7 @@
         update_cache: yes
         cache_valid_time: 3600
     
-    - name: Instal basic dependencies
+    - name: Install basic dependencies
       apt:
         name: 
          - git
@@ -25,3 +25,47 @@
         name: nginx
         state: started
         enabled: yes
+
+    - name: Install NodeSource repo (for latest Node.js)
+      shell: curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+
+    - name: Install Node.js and NPM
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Install PM2 (Process Manager)
+      npm:
+        name: pm2
+        global: yes
+
+    - name: Check if swap file exists
+      stat:
+        path: /swapfile
+      register: swap_file_check
+
+    - name: Create swap File (2GB)
+      command: fallocate -l 2G /swapfile
+      when: not swap_file_check.stat.exists
+
+    - name: Set permissions on swap file
+      file:
+        path: /swapfile
+        owner: root
+        group: root
+        mode: '0600'
+      when: not swap_file_check.stat.exists
+
+    - name: Format swap file
+      command: mkswap /swapfile
+      when: not swap_file_check.stat.exists
+
+    - name: Enable swap file
+      command: swapon /swapfile
+      when: not swap_file_check.stat.exists
+
+    - name: Add swap to /etc/fstab
+      lineinfile:
+        path: /etc/fstab
+        line: '/swapfile none swap sw 0 0'
+        state: present

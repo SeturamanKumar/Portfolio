@@ -62,3 +62,79 @@
         owner: azureuser
         group: azureuser
         mode: '0600'
+
+    - name: Run Database Migrations
+      command: "{{ venv_dir }}/bin/python manage.py migrate"
+      args:
+        chdir: "{{ app_dir }}"
+      become_user: azureuser
+
+    - name: Collect Static Files
+      command: "{{ venv_dir }}/bin/python manage.py collectstatic --noinput"
+      args:
+        chdir: "{{ app_dir }}"
+      become_user: azureuser
+
+    - name: Install Frontend Dependencies
+      npm:
+        path: "{{ project_dir }}/client"
+        ci: yes
+      become_user: azureuser
+
+    - name: Build Next.js
+      command: npm run build
+      args:
+        chdir: "{{ project_dir }}/client"
+      become_user: azureuser
+
+    - name: Start Next.js with PM2
+      command: pm2 start npm --name "nextjs-frontend" -- start
+      args:
+        chdir: "{{ project_dir }}/client"
+      register: pm2_start
+      failed_when:
+        - pm2_start.rc != 0
+        - "'Script already launched' not in pm2_start.stderr"
+      become_user: azureuser
+
+    - name: Save PM2 list
+      command: pm2 save
+      become_user: azureuser
+
+    - name: Setup Gunicorn systemd service
+      template:
+        src: templates/gunicorn.service.j2
+        dest: /etc/systemd/system/gunicorn.service
+      notify: Restart Gunicorn
+
+    - name: Setup Nginx Server Block
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/sites-available/portfolio
+      notify: Restart Nginx
+
+    - name: Link Nginx config to enabled sites
+      file:
+        src: /etc/nginx/sites-available/portfolio
+        dest: /etc/nginx/sites-enabled/portfolio
+        state: link
+      notify: Restart Nginx
+
+    - name: Remove default Nginx site
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      notify: Restart Nginx
+
+  handlers:
+    - name: Restart Gunicorn
+      systemd:
+        name: gunicorn
+        state: restarted
+        enabled: yes
+        daemon_resolved: yes
+
+    - name: Restart Nginx
+      systemd:
+        name: nginx
+        state: restarted
