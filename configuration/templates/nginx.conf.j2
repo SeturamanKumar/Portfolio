@@ -1,6 +1,5 @@
 server {
-    listen 80;
-    server_name {{ env_allowed_hosts | replace(',',' ')}};
+    server_name 20.219.138.90 seturaman.me www.seturaman.me;
 
     location = /favicon.ico { 
         access_log off; 
@@ -20,4 +19,30 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/seturaman.me/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/seturaman.me/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}server {
+    if ($host = www.seturaman.me) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = seturaman.me) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name 20.219.138.90 seturaman.me www.seturaman.me;
+    return 404; # managed by Certbot
+
+
+
+
 }

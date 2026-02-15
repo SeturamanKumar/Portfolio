@@ -40,6 +40,7 @@ infrastructure/.terraform.lock.hcl
 infrastructure/*.tfvars
 infrastructure/*.tfvars.json
 infrastructure/terraform.tfstate
+infrastructure/terraform.tfstate.backup
 
 terraform/*.tfstate
 terraform/*.tfstate.backup
