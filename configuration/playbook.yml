@@ -18,6 +18,9 @@
          - python3-venv
          - nginx
          - curl
+         - monit
+         - certbot
+         - python3-certbot-nginx
         state: present
 
     - name: Ensure Nginx is Running

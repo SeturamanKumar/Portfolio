@@ -126,6 +126,15 @@
         state: absent
       notify: Restart Nginx
 
+    - name: Configure Monit
+      template:
+        src: templates/monitrc.j2
+        dest: /etc/monit/monitrc
+        owner: root
+        group: root
+        mode: '0700'
+      notify: Restart Monit
+
   handlers:
     - name: Restart Gunicorn
       systemd:
@@ -137,4 +146,9 @@
     - name: Restart Nginx
       systemd:
         name: nginx
+        state: restarted
+
+    - name: Restart Monit
+      systemd:
+        name: monit
         state: restarted

@@ -1,0 +1,21 @@
+set daemon 60
+
+set log syslog
+
+set httpd port 2812 and
+    allow admin:{{ env_monit_password }}
+
+check system {{ inventory_hostname }}
+    if loadavg (1min) > 4 then alert
+    if memory usage > 80% then alert
+    if cpu usage (user)  80% then alert
+
+check process nginx with pidfile /var/run/nginx.pid
+    start program = "/usr/bin/systemctl start nginx"
+    stop program = "/usr/bin/systemctl stop alert"
+    if failed port 80 protocol http then restart
+
+check process gunicorn with pidfile /run/gunicorn.pid
+    start program = "/usr/bin/systemctl stop gunicorn"
+    stop program = "/usr/bin/systemctl stop gunicorn"
+    if failed unixsocket /run/gunicorn.sock then restart

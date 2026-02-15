@@ -68,6 +68,18 @@ resource "azurerm_network_security_group" "portfolio_nsg" {
         source_address_prefix = "*"
         destination_address_prefix = "*"
     }
+
+    security_rule {
+        name = "Monit"
+        priority = 1003
+        direction = "Inbound"
+        access = "Allow"
+        protocol = "Tcp"
+        source_port_range = "*"
+        destination_port_range = "2812"
+        source_address_prefix = "*"
+        destination_address_prefix = "*"
+    }
 }
 
 resource "azurerm_network_interface" "portfolio_nic" {
