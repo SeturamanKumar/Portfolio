@@ -45,4 +45,5 @@ infrastructure/terraform.tfstate.backup
 terraform/*.tfstate
 terraform/*.tfstate.backup
 
-*.pem
+*.peminfrastructure/*.tfstate
+infrastructure/*.tfstate.backup
