@@ -8,7 +8,7 @@ server {
 
     location ~ ^/(super-secret-admin-console|api|static)/ {
         include proxy_params;
-        proxy_pass http://unix:/run/gunicorn.sock;
+        proxy_pass http://unix:/run/gunicorn/gunicorn.sock;
     }
     
     location / {

@@ -15,7 +15,7 @@ check process nginx with pidfile /var/run/nginx.pid
     stop program = "/usr/bin/systemctl stop alert"
     if failed port 80 protocol http then restart
 
-check process gunicorn with pidfile /run/gunicorn.pid
+check process gunicorn with pidfile /run/gunicorn/gunicorn.pid
     start program = "/usr/bin/systemctl stop gunicorn"
     stop program = "/usr/bin/systemctl stop gunicorn"
     if failed unixsocket /run/gunicorn.sock then restart

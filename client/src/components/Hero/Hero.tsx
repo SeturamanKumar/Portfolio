@@ -55,7 +55,7 @@ export default function Hero() {
             </svg>
           </a>
           <a 
-            href="mailto:seturamankumar@gmail.com"
+            href="mailto:kumar.seturaman@gmail.com"
             className={styles.socialIcon}
             aria-label="Email me"
             >

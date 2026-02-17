@@ -6,7 +6,8 @@ After=network.target
 User=azureuser
 Group=www-data
 WorkingDirectory={{ app_dir }}
-ExecStart={{ venv_dir }}/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/gunicorn.sock config.wsgi:application --pid /run/gunicorn.pid config.wsgi:application
+ExecStart={{ venv_dir }}/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/gunicorn/gunicorn.sock --pid /run/gunicorn/gunicorn.pid config.wsgi:application
+RuntimeDirectory=gunicorn
 
 [Install]
 WantedBy=multi-user.target

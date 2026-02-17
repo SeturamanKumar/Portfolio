@@ -81,6 +81,11 @@
         ci: yes
       become_user: azureuser
 
+    - name: Clean previous build artefacts
+      file:
+        path: "{{ project_dir }}/.next"
+        state: absent
+
     - name: Build Next.js
       command: npm run build
       args:
