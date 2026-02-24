@@ -32,7 +32,7 @@ const projects = [
     ],
     status: "In Progress" as const,
     links: {
-      github: "https://github.com/SeturamanKumar",
+      github: "https://github.com/SeturamanKumar/SquadHost",
       live: "#",
     },
   },

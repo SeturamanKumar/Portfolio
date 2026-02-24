@@ -83,7 +83,7 @@
 
     - name: Clean previous build artefacts
       file:
-        path: "{{ project_dir }}/.next"
+        path: "{{ project_dir }}/client/.next"
         state: absent
 
     - name: Build Next.js
@@ -92,8 +92,8 @@
         chdir: "{{ project_dir }}/client"
       become_user: azureuser
 
-    - name: Start Next.js with PM2
-      command: pm2 start npm --name "nextjs-frontend" -- start
+    - name: Resatart or start Next.js with PM2
+      shell: ppm2 restart nextjs-frontend || pm2 start npm --name "nextjs-frontend" -- start
       args:
         chdir: "{{ project_dir }}/client"
       register: pm2_start
