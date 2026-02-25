@@ -42,6 +42,7 @@ jobs:
           env_allowed_hosts: "${{ secrets.DJANGO_ALLOWED_HOSTS }}"
           env_email_host_user: "${{ secrets.EMAIL_HOST_USER }}"
           env_email_host_password: "${{ secrets.EMAIL_HOST_PASSWORD }}"
+          env_monit_password: "${{ secrets.MONIT_PASSWORD }}"
           EOF
 
       - name: Set up SSH Access to Azure VM

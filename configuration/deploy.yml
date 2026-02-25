@@ -1,6 +1,6 @@
 ---
 - name: Deploy Django Application
-  hosts: webservers
+  hosts: all
   become: yes
   remote_user: azureuser
 
@@ -102,7 +102,7 @@
         group: azureuser
 
     - name: Restart or Start Next.js with PM2
-      shell: pm2 restart nexjs-frontend || pm2 start npm --name "nextjs-frontend" --start
+      shell: pm2 restart nextjs-frontend || pm2 start npm --name "nextjs-frontend" -- start
       args:
         chdir: "{{ project_dir }}/client"
       become_user: azureuser
