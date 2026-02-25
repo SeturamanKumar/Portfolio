@@ -85,21 +85,26 @@
       file:
         path: "{{ project_dir }}/client/.next"
         state: absent
+    
+    - name: Copy Next.js build from GitHub Actions
+      copy:
+        src: "{{ playbook_dir }}/../client/next-build.tar.gz"
+        dest: "{{ project_dir }}/client/next-build.tar.gz"
+        owner: azureuser
+        group: azureuser
 
-    - name: Build Next.js
-      command: npm run build
+    - name: Extract Next.js build 
+      unarchive:
+        src: "{{ project_dir }}/client/next-build.tar.gz"
+        dest: "{{ project_dir }}/client/"
+        remote_src: yes
+        owner: azureuser
+        group: azureuser
+
+    - name: Restart or Start Next.js with PM2
+      shell: pm2 restart nexjs-frontend || pm2 start npm --name "nextjs-frontend" --start
       args:
         chdir: "{{ project_dir }}/client"
-      become_user: azureuser
-
-    - name: Resatart or start Next.js with PM2
-      shell: ppm2 restart nextjs-frontend || pm2 start npm --name "nextjs-frontend" -- start
-      args:
-        chdir: "{{ project_dir }}/client"
-      register: pm2_start
-      failed_when:
-        - pm2_start.rc != 0
-        - "'Script already launched' not in pm2_start.stderr"
       become_user: azureuser
 
     - name: Save PM2 list
