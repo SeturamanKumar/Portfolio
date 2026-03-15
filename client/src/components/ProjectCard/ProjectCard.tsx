@@ -36,7 +36,7 @@ export default function ProjectCard({ title, description, tech, status, links }:
                     GitHub ↗
                 </a>
                 {
-                    status === "Live" && (
+                    status === "Live" && links.live !== "#" && (
                         <a href={links.live} target="_blanks" rel="noopener noreferrer" className={styles.link}>
                             Live Demo ↗
                         </a>

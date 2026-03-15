@@ -30,7 +30,7 @@ const projects = [
       "Python/Boto3",
       "Next.js",
     ],
-    status: "In Progress" as const,
+    status: "Live" as const,
     links: {
       github: "https://github.com/SeturamanKumar/SquadHost",
       live: "#",
