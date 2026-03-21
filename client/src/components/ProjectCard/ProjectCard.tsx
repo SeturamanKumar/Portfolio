@@ -16,7 +16,7 @@ export default function ProjectCard({ title, description, tech, status, links }:
     return (
         <div className={styles.card}>
             <div className={styles.cardHeader}>
-                <h3 className={styles.projectsTitle}>{title}</h3>
+                <h3 className={styles.projectTitle}>{title}</h3>
                 <div className={styles.statusBadge} data-status={status}>
                     {status === "Live" ? "🟢 Live" : "🚧 Building"}
                 </div>
@@ -37,7 +37,7 @@ export default function ProjectCard({ title, description, tech, status, links }:
                 </a>
                 {
                     status === "Live" && links.live !== "#" && (
-                        <a href={links.live} target="_blanks" rel="noopener noreferrer" className={styles.link}>
+                        <a href={links.live} target="_blank" rel="noopener noreferrer" className={styles.link}>
                             Live Demo ↗
                         </a>
                     )
