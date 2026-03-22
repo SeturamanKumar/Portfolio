@@ -29,12 +29,6 @@ __pycache__/
 *.pyc
 db.sqlite3
 
-
-configuration/hosts.ini
-configuration/*.retry
-configuration/.vault_pass
-configuration/vars/secrets.yml
-
 infrastructure/.terraform/
 infrastructure/.terraform.lock.hcl
 infrastructure/*.tfvars

@@ -1,0 +1,113 @@
+name: Deploy Portfolio to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: ap-south-1
+
+jobs:
+  terraform:
+    name: Provision Infrastructure
+    runs-on: ubuntu-latest
+    outputs:
+      api_gateway_url: ${{ steps.tf_outputs.outputs.api_gateway_url }}
+      s3_bucket_name: ${{ steps.tf_outputs.outputs.s3_bucket_name }}
+      lambda_function_name: ${{ steps.tf_outputs.outputs.lambda_function_name }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        working-directory: infrastructure
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: infrastructure
+        run: |
+          terraform apply -auto-approve \
+            -var="sender_email=${{ secrets.SENDER_EMAIL }}" \
+            -var="recipient_email=${{ secrets.RECIPIENT_EMAIL }}"
+
+      - name: Capture Terraform outputs
+        id: tf_outputs
+        working-directory: infrastructure
+        run: |
+          echo "api_gateway_url=$(terraform output -raw api_gateway_url)" >> $GITHUB_OUTPUT
+          echo "s3_bucket_name=$(terraform output -raw s3_bucket_name)" >> $GITHUB_OUTPUT
+          echo "lambda_function_name=$(terraform output -raw lambda_function_name)" >> $GITHUB_OUTPUT
+
+  deploy-frontend:
+    name: Build and Deploy Frontend
+    runs-on: ubuntu-latest
+    needs: terraform
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Build Next.js static export
+        working-directory: client
+        env:
+          NEXT_PUBLIC_API_URL: ${{ needs.terraform.outputs.api_gateway_url }}
+        run: npm run build
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync client/out/ s3://${{ needs.terraform.outputs.s3_bucket_name }}/ --delete
+
+  deploy-lambda:
+    name: Deploy Lambda Function
+    runs-on: ubuntu-latest
+    needs: terraform
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Package Lambda Function
+        run: zip -j lambda.zip lambda/handler.py
+
+      - name: Deploy Lambda Function
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ needs.terraform.outputs.lambda_function_name }} \
+            --zip-file fileb://lambda.zip
