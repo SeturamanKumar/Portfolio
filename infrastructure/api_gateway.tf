@@ -30,3 +30,9 @@ resource "aws_lambda_permission" "api_gateway" {
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.portfolio.execution_arn}/*/*"
 }
+
+resource "aws_apigatewayv2_route" "contact" {
+  api_id    = aws_apigatewayv2_api.portfolio.id
+  route_key = "POST /api/contact"
+  target    = "integration/${aws_apigatewayv2_integration.contact.id}"
+}
