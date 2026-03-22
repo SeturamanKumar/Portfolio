@@ -31,8 +31,8 @@ export default function ContactMe() {
         e.preventDefault();
         setStatus('loading');
         try {
-            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
-            const response = await fetch(`/api/contact/`, {
+            const API_URL = process.env.NEXT_PUBLIC_API_URL;
+            const response = await fetch(`${API_URL}/api/contact`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
