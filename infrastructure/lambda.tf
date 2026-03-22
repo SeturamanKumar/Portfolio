@@ -3,7 +3,7 @@ data "archive_file" "lambda_placeholder" {
   output_path = "${path.module}/lambda_placeholder.zip"
 
   source {
-    content  = "def handler(event, contact): return {'statusCode': 200, 'body': 'placeholder'}"
+    content  = "def handler(event, context): return {'statusCode': 200, 'body': 'placeholder'}"
     filename = "handler.py"
   }
 }
@@ -18,8 +18,8 @@ resource "aws_lambda_function" "contact" {
 
   environment {
     variables = {
-      SENDER_EMAIL   = var.sender_email
-      RECIPENT_EMAIL = var.recipient_email
+      SENDER_EMAIL    = var.sender_email
+      RECIPIENT_EMAIL = var.recipient_email
     }
   }
 
