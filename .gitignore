@@ -41,3 +41,5 @@ terraform/*.tfstate.backup
 
 *.peminfrastructure/*.tfstate
 infrastructure/*.tfstate.backup
+
+infrastructure/lambda_placeholder.zip

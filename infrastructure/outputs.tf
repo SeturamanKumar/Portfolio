@@ -12,3 +12,8 @@ output "lambda_function_name" {
   description = "Lambda function name for Github Actions code deployment."
   value       = aws_lambda_function.contact.function_name
 }
+
+output "cloudfront_domain" {
+  description = "CloudFront domain name. Add as CNAME in Namecheap."
+  value       = aws_cloudfront_distribution.frontend.domain_name
+}
