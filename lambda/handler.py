@@ -28,7 +28,7 @@ def handler(event, context):
         ses.send_email(
             Source=sender,
             Destination={
-                'ToAddresses': [reciepient]
+                'ToAddresses': [recipient]
             },
             Message={
                 'Subject': {
