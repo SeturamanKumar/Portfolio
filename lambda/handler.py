@@ -22,7 +22,7 @@ def handler(event, context):
         return _response(400, {'error': 'All fields are requireds'})
 
     sender = os.environ['SENDER_EMAIL']
-    reciepient = os.environ['RECIPIENT_EMAIL']
+    recipient = os.environ['RECIPIENT_EMAIL']
 
     try:
         ses.send_email(
