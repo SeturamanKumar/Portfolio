@@ -1,20 +1,20 @@
 import styles from "./Hero.module.css";
+import ScrambleText from "@/components/ScrambleText/ScrambleText";
+import { SCRAMBLE_DURATION, GAP } from "@/lib/scrambleConfig";
+import { heroContent } from "@/lib/pageContent";
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <h1 className={styles.name}>
-        Seturaman Kumar
-      </h1>
-      <p className={styles.title}>
-        Full Stack Developer
-      </p>
+      <ScrambleText as="h1" text={heroContent.name} className={styles.name} delay={0}/>
+      <ScrambleText as="p" text={heroContent.title} className={styles.title} delay={SCRAMBLE_DURATION + GAP}/>
+
       <a 
-        href="https://maps.app.goo.gl/rEZX88Bywc9zXqr77"
+        href={heroContent.locationUrl}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.locationLink}>
-          <span>Based In India (IIT BHU)</span>
+          <ScrambleText as="span" text={heroContent.location} delay={SCRAMBLE_DURATION * 2 + GAP}/>
           <svg 
             width="18" 
             height="18" 

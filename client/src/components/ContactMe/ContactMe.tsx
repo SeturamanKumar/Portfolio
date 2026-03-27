@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import styles from "./ContactMe.module.css";
+import ScrambleText from "@/components/ScrambleText/ScrambleText";
+import { contactContent } from "@/lib/pageContent";
     
 export default function ContactMe() {
 
@@ -55,7 +57,7 @@ export default function ContactMe() {
 
     return(
         <section className={styles.container}>
-            <h2 className={styles.title}>Get In Touch</h2>
+            <ScrambleText as="h2" text={contactContent.heading} className={styles.title} delay={0}/>
             <div className={styles.cardGrid}>
                 <a 
                     href="https://github.com/SeturamanKumar"

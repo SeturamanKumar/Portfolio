@@ -1,5 +1,8 @@
 import styles from "./ProjectsMe.module.css";
 import ProjectCard from "../ProjectCard/ProjectCard";
+import ScrambleText from "@/components/ScrambleText/ScrambleText";
+import { SCRAMBLE_DURATION } from "@/lib/scrambleConfig";
+import { projectsContent } from "@/lib/pageContent";
 
 const projects = [
   {
@@ -42,7 +45,7 @@ export default function Projects() {
   return (
     <section className={styles.section} id="projects">
       <div className={styles.container}>
-        <h2 className={styles.heading}>Featured Projects</h2>
+        <ScrambleText as="h2" text={projectsContent.heading} className={styles.heading} delay={0}/>
         <div className={styles.grid}>
           {
             projects.map((project, index) => (

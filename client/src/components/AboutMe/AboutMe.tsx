@@ -1,19 +1,15 @@
 import styles from "./AboutMe.module.css";
+import ScrambleText from "@/components/ScrambleText/ScrambleText";
+import { SCRAMBLE_DURATION, GAP } from "@/lib/scrambleConfig";
+import { aboutContent } from "@/lib/pageContent";
 
 export default function AboutMe() {
 
     return(
         <section className={styles.section} id="about">
             <div>
-                <h2 className={styles.heading}>
-                    About Me
-                </h2>
-                <p className={styles.textBlock}>
-                    I'm <strong>Seturaman</strong>, a developer based in India (IIT BHU) 
-                    currently a student. I finished studying Full Stack in Decemeber 2025. 
-                    I just started moving away from frontend to <strong>Backend and DevOps. </strong> 
-                    I have used AWS before and worked with <strong>EC2 and S3.</strong>
-                </p>
+              <ScrambleText as="h1" text={aboutContent.heading} className={styles.heading} delay={0}/>
+              <ScrambleText as="p" text={aboutContent.intro} className={styles.textBlock} delay={SCRAMBLE_DURATION + GAP}/>
             </div>
             <div className={styles.bentoGrid}>
                 <div className={`${styles.bentoBox} ${styles.wide} ${styles.mobileHidden}`}>
@@ -45,12 +41,7 @@ export default function AboutMe() {
                 </div>
             </div>
             <div className={styles.textBlock}>
-                <p>
-                    Beyond the frontend, I find the backend and DevOps logic quite
-                    interesting. Moving away from frontend I have learned <strong>Terraform, 
-                    Ansible, Nginx and Monit</strong> for DevOps. And started learning <strong>Django </strong> 
-                    for creating newer projects to start integrating AI/ML.
-                </p>
+                <ScrambleText as="p" text={aboutContent.outro} delay={SCRAMBLE_DURATION * 2 + GAP}/>
             </div>
         </section>
     )
