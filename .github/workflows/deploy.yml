@@ -16,6 +16,8 @@ jobs:
       api_gateway_url: ${{ steps.tf_outputs.outputs.api_gateway_url }}
       s3_bucket_name: ${{ steps.tf_outputs.outputs.s3_bucket_name }}
       lambda_function_name: ${{ steps.tf_outputs.outputs.lambda_function_name }}
+      cloudfront_distribution_id: ${{ steps.tf_outputs.outputs.cloudfront_distribution_id }}
+
 
     steps:
       - name: Checkout code
@@ -51,6 +53,8 @@ jobs:
           echo "api_gateway_url=$(terraform output -raw api_gateway_url)" >> $GITHUB_OUTPUT
           echo "s3_bucket_name=$(terraform output -raw s3_bucket_name)" >> $GITHUB_OUTPUT
           echo "lambda_function_name=$(terraform output -raw lambda_function_name)" >> $GITHUB_OUTPUT
+          echo "cloudfront_distribution_id=$(terraform output -raw cloudfront_distribution_id)" >> $GITHUB_OUTPUT
+
 
   deploy-frontend:
     name: Build and Deploy Frontend
@@ -84,8 +88,10 @@ jobs:
         run: npm run build
 
       - name: Sync to S3
-        run: |
-          aws s3 sync client/out/ s3://${{ needs.terraform.outputs.s3_bucket_name }}/ --delete
+        run: aws s3 sync client/out/ s3://${{ needs.terraform.outputs.s3_bucket_name }}/ --delete
+
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ needs.terraform.outputs.cloudfront_distribution_id }} --paths "/*"
 
   deploy-lambda:
     name: Deploy Lambda Function

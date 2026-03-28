@@ -9,7 +9,7 @@ function randomChar(): string {
   return CHARSET[Math.floor(Math.random() * CHARSET.length)];
 }
 
-export function useScramble(text: string, delay: number = 0) {
+export function useScramble(text: string, delay: number = 0, duration: number = SCRAMBLE_DURATION) {
   const [display, setDisplay] = useState("");
   const frameRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const startRef = useRef<number | null>(null);
@@ -24,7 +24,7 @@ export function useScramble(text: string, delay: number = 0) {
 
       function tick() {
         const elapsed = performance.now() - (startRef.current ?? 0);
-        const progress = Math.min(elapsed / SCRAMBLE_DURATION, 1);
+        const progress = Math.min(elapsed / duration, 1);
         const resolvedCount = Math.floor(progress * text.length);
 
         setDisplay(
@@ -51,7 +51,7 @@ export function useScramble(text: string, delay: number = 0) {
       clearTimeout(delayTimer);
       if (frameRef.current) clearTimeout(frameRef.current);
     };
-  }, [text, delay]);
+  }, [text, delay, duration]);
 
   return display;
 }
