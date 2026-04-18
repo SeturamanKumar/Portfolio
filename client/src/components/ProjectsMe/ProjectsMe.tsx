@@ -12,16 +12,16 @@ const CARD_1_DELAY  = CARD_0_DELAY  + STEP;
 
 const projects = [
   {
-    title: "Cloud-Native Portfolio (This Website)",
-    description: "A full-stack personal platform deployed on Azure. It features a self-healing infrastructure managed by Monit, automated configuration via Ansible, infrastructure-as-code provisioning with Terraform, and SSL certificates signed by certbot.",
-    tech: ["Next.js", "Django", "Azure VM", "Nginx", "Ansible", "Terraform", "Monit"],
+    title: "Portfolio Website",
+    description: "Personal portfolio website with a serverless contact form. Frontend hosted on CloudFront, backend uses Lambda and API Gateway to send emails via SES.",
+    tech: ["Next.js", "Node.js/Express", "AWS Lambda", "API Gateway", "SES", "CloudFront"],
     status: "Live" as const,
     links: { github: "https://github.com/SeturamanKumar/Portfolio", live: "https://seturaman.me" },
   },
   {
-    title: "SqaudHost (Building)",
-    description: "An on-demand Minecraft server hosting platform. It uses AWS Boto3 to programmatically launch EC2 Spot Instances and backs up game worlds to S3 automatically to minimize costs.",
-    tech: ["AWS EC2", "AWS S3", "Docker", "Python/Boto3", "Next.js"],
+    title: "SquadHost",
+    description: "Minecraft server hosting platform on AWS. Users select server specs via a web interface and launch servers on demand. Auto-shutdown after 8 min of no players; master server terminates itself after 10 min of no active servers to achieve scale-to-zero billing.",
+    tech: ["Next.js", "Python/Django", "PostgreSQL", "Docker", "AWS (EC2, S3, Lambda, RDS)", "Terraform", "Ansible"],
     status: "Live" as const,
     links: { github: "https://github.com/SeturamanKumar/SquadHost", live: "#" },
   },
