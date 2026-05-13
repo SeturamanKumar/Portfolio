@@ -47,11 +47,36 @@ export default function ProjectCard({ title, description, tech, status, links, d
       </div>
 
       <div className={styles.links}>
-        <ScrambleText as="span" text="GitHub ↗" className={styles.link} delay={s3.delay} duration={s3.duration} />
+        <a
+          href={links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          <ScrambleText
+            as="span"
+            text="GitHub ↗"
+            delay={s3.delay}
+            duration={s3.duration}
+          />
+        </a>
         {status === "Live" && links.live !== "#" && (
-          <ScrambleText as="span" text="Live Demo ↗" className={styles.link} delay={s3.delay} duration={s3.duration} />
+          <a
+            href={links.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}
+          >
+            <ScrambleText
+              as="span"
+              text="Live Demo ↗"
+              delay={s3.delay}
+              duration={s3.duration}
+            />
+          </a>
         )}
       </div>
+
     </ScrambleCard>
   );
 }

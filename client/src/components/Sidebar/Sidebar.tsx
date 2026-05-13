@@ -23,13 +23,9 @@ interface NavLinkProps {
 }
 
 function NavLink({ name, path, isActive, initialDelay }: NavLinkProps) {
-  const display = useScramble(name, isActive ? 0 : initialDelay);
-
+  const display = useScramble(name, initialDelay);
   return (
-    <Link
-      href={path}
-      className={`${styles.link} ${isActive ? styles.active : ""}`}
-    >
+    <Link href={path} className={`${styles.link} ${isActive ? styles.active : ""}`}>
       <span className={styles.linkText}>{display}</span>
     </Link>
   );
@@ -42,11 +38,18 @@ export default function Sidebar() {
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         {navItems.map((item, index) => {
-          const isActive =
-            item.path === "/" ? pathname === "/" : pathname.startsWith(item.path);
+          function isActivePath(itemPath: string, currentPath: string): boolean {
+          const normalise = (p: string) => (p.replace(/\/$/, '') || '/');
+          const cur = normalise(currentPath);
+          const item = normalise(itemPath);
+          if (item === '/') return cur === '/';
+          return cur.startsWith(item);
+        }
+        const isActive = isActivePath(item.path, pathname);
+
           return (
             <NavLink
-              key={isActive ? `${item.path}-active`: item.path}
+              key={item.path}
               name={item.name}
               path={item.path}
               isActive={isActive}

@@ -20,10 +20,10 @@ const projects = [
   },
   {
     title: "SquadHost",
-    description: "Minecraft server hosting platform on AWS. Users select server specs via a web interface and launch servers on demand. Auto-shutdown after 8 min of no players; master server terminates itself after 10 min of no active servers to achieve scale-to-zero billing.",
+    description: "Self‑hosted Minecraft server platform on AWS with scale‑to‑zero billing. Auto‑hibernates idle servers and restores worlds from S3. Full documentation at squadhost.seturaman.me.",
     tech: ["Next.js", "Python/Django", "PostgreSQL", "Docker", "AWS (EC2, S3, Lambda, RDS)", "Terraform", "Ansible"],
     status: "Live" as const,
-    links: { github: "https://github.com/SeturamanKumar/SquadHost", live: "#" },
+    links: { github: "https://github.com/SeturamanKumar/SquadHost", live: "https://squadhost.seturaman.me" },
   },
 ];
 
