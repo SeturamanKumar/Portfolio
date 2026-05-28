@@ -185,8 +185,7 @@ export default function CursorGlow() {
           p.vy = (p.vy / speed) * MAX_SPEED;
         }
 
-        p.vx *= 0.985;
-        p.vy *= 0.985;
+
         p.x += p.vx;
         p.y += p.vy;
 
