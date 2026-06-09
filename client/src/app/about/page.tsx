@@ -1,9 +1,5 @@
-import AboutMe from "@/components/AboutMe/AboutMe"
+import AboutMe from "@/components/AboutMe/AboutMe";
 
-export default function About(){
-    return(
-        <main>
-            <AboutMe />
-        </main>
-    )
+export default function AboutPage() {
+  return <AboutMe />;
 }

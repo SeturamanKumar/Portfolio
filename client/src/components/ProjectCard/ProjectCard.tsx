@@ -1,82 +1,54 @@
 import styles from "./ProjectCard.module.css";
-import ScrambleText from "@/components/ScrambleText/ScrambleText";
-import ScrambleCard from "@/components/ScrambleCard/ScrambleCard";
-import { SCRAMBLE_DURATION } from "@/lib/scrambleConfig";
 
-interface ProjectProps {
+interface ProjectCardProps {
   title: string;
+  tagline: string;
   description: string;
   tech: string[];
-  status: "Live" | "In Progress";
-  links: {
-    github: string;
-    live: string;
-  };
-  delay?: number;
+  status: "Live" | "Research" | "In Progress";
+  links: { github: string; live: string; docs: string };
 }
 
-const SLICES = 4;
-const SLICE_DURATION = SCRAMBLE_DURATION / SLICES;
-
-export default function ProjectCard({ title, description, tech, status, links, delay = 0 }: ProjectProps) {
-
-  const s0 = { delay: delay + SLICE_DURATION * 0, duration: SLICE_DURATION };
-  const s1 = { delay: delay + SLICE_DURATION * 1, duration: SLICE_DURATION };
-  const s2 = { delay: delay + SLICE_DURATION * 2, duration: SLICE_DURATION };
-  const s3 = { delay: delay + SLICE_DURATION * 3, duration: SLICE_DURATION };
-
+export default function ProjectCard({ title, tagline, description, tech, status, links }: ProjectCardProps) {
   return (
-    <ScrambleCard delay={delay} className={styles.card}>
-      <div className={styles.cardHeader}>
-        <ScrambleText as="h3" text={title} className={styles.projectTitle} delay={s0.delay} duration={s0.duration} />
-        <ScrambleText
-          as="div"
-          text={status === "Live" ? "🟢 Live" : "🚧 Building"}
-          className={styles.statusBadge}
-          delay={s0.delay}
-          duration={s0.duration}
-        />
+    <div className={styles.card}>
+      <div className={styles.cardTop}>
+        <div className={styles.titleRow}>
+          <h3 className={styles.title}>{title}</h3>
+          <span className={`${styles.badge} ${styles[`badge_${status.replace(" ", "_").toLowerCase()}`]}`}>
+            {status}
+          </span>
+        </div>
+        <p className={styles.tagline}>{tagline}</p>
       </div>
 
-      <ScrambleText as="p" text={description} className={styles.description} delay={s1.delay} duration={s1.duration} />
+      <p className={styles.desc}>{description}</p>
 
-      <div className={styles.techStack}>
-        {tech.map((item) => (
-          <ScrambleText key={item} as="span" text={item} className={styles.tag} delay={s2.delay} duration={s2.duration} />
+      <div className={styles.tech}>
+        {tech.map((t) => (
+          <span key={t} className={styles.tag}>{t}</span>
         ))}
       </div>
 
-      <div className={styles.links}>
-        <a
-          href={links.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-        >
-          <ScrambleText
-            as="span"
-            text="GitHub ↗"
-            delay={s3.delay}
-            duration={s3.duration}
-          />
-        </a>
-        {status === "Live" && links.live !== "#" && (
-          <a
-            href={links.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.link}
-          >
-            <ScrambleText
-              as="span"
-              text="Live Demo ↗"
-              delay={s3.delay}
-              duration={s3.duration}
-            />
-          </a>
-        )}
-      </div>
-
-    </ScrambleCard>
+      {(links.github || links.live || links.docs) && (
+        <div className={styles.links}>
+          {links.github && (
+            <a href={links.github} target="_blank" rel="noopener noreferrer" className={styles.link}>
+              GitHub ↗
+            </a>
+          )}
+          {links.live && (
+            <a href={links.live} target="_blank" rel="noopener noreferrer" className={styles.link}>
+              Live ↗
+            </a>
+          )}
+          {links.docs && (
+            <a href={links.docs} target="_blank" rel="noopener noreferrer" className={styles.link}>
+              Docs ↗
+            </a>
+          )}
+        </div>
+      )}
+    </div>
   );
 }

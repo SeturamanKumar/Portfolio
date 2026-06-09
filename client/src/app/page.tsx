@@ -1,11 +1,11 @@
 import Hero from "@/components/Hero/Hero";
-import Skills from "@/components/Skills/Skills";
+import SquadHostFeature from "@/components/SquadHostFeature/SquadHostFeature";
 
 export default function Home() {
   return (
-    <main>
-        <Hero />
-        <Skills />
+    <main className="page" style={{ paddingTop: 0 }}>
+      <Hero />
+      <SquadHostFeature />
     </main>
   );
 }

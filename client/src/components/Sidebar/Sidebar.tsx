@@ -3,10 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Sidebar.module.css";
-import { useScramble } from "@/hooks/useScramble";
-import { SCRAMBLE_DURATION, GAP } from "@/lib/scrambleConfig";
 
-const STEP = SCRAMBLE_DURATION + GAP; // 800ms
+const STEP = 100; // ms delay between each nav item fade-in
 
 const navItems = [
   { name: "Home",     path: "/" },
@@ -23,10 +21,14 @@ interface NavLinkProps {
 }
 
 function NavLink({ name, path, isActive, initialDelay }: NavLinkProps) {
-  const display = useScramble(name, initialDelay);
   return (
     <Link href={path} className={`${styles.link} ${isActive ? styles.active : ""}`}>
-      <span className={styles.linkText}>{display}</span>
+      <span
+        className={styles.linkText}
+        style={{ animationDelay: `${initialDelay}ms` }}
+      >
+        {name}
+      </span>
     </Link>
   );
 }
@@ -39,13 +41,13 @@ export default function Sidebar() {
       <nav className={styles.nav}>
         {navItems.map((item, index) => {
           function isActivePath(itemPath: string, currentPath: string): boolean {
-          const normalise = (p: string) => (p.replace(/\/$/, '') || '/');
-          const cur = normalise(currentPath);
-          const item = normalise(itemPath);
-          if (item === '/') return cur === '/';
-          return cur.startsWith(item);
-        }
-        const isActive = isActivePath(item.path, pathname);
+            const normalise = (p: string) => (p.replace(/\/$/, '') || '/');
+            const cur = normalise(currentPath);
+            const item = normalise(itemPath);
+            if (item === '/') return cur === '/';
+            return cur.startsWith(item);
+          }
+          const isActive = isActivePath(item.path, pathname);
 
           return (
             <NavLink

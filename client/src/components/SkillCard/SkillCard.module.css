@@ -1,46 +1,37 @@
 .card {
-    display: flex;
-    align-items: center;
-    background-color: #111;
-    border: 1px solid #333;
-    border-radius: 12px;
-    padding: 8px;
-    overflow: hidden;
-    transition: all 0.2s ease;
-    width: 100%;
-    max-width: 240px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  cursor: default;
 }
 
 .card:hover {
-    border-color: #555;
-    transform: translateY(-2px);
-    background-color: #151515;
+  border-color: var(--border-hover);
+  background: var(--surface-2);
+  transform: translateY(-2px);
 }
 
-.iconContainer {
-    width: 44px;
-    height: 44px;
-    background-color: #444444;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #333;
-    border-radius: 8px;
-    flex-shrink: 0;
-    overflow: hidden;
+.iconWrap {
+  width: 38px; height: 38px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    display: block;
+  width: 22px; height: 22px;
+  object-fit: contain; display: block;
 }
 
 .name {
-    flex: 1;
-    padding-left: 12px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #ededed;
+  font-family: var(--ff-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text);
 }

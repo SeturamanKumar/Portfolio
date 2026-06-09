@@ -1,11 +1,10 @@
-"use client";
+import RevealObserver from "@/components/RevealObserver/RevealObserver";
 
-import { motion } from "framer-motion";
-
-export default function Template({ children }: { children: React.ReactNode}) {
-    return(
-      <>
-        {children}
-      </>
-    );
-};
+export default function Template({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <RevealObserver />
+      {children}
+    </>
+  );
+}

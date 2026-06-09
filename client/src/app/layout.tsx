@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import styles from "./layout.module.css";
 import Sidebar from "@/components/Sidebar/Sidebar";
-import CursorGlow from "@/components/CursorGlow/CursorGlow";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,13 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CursorGlow />
         <div className={styles.container}>
           <Sidebar />
           <main className={styles.main}>
-            <div className={`${styles.content} ${styles.safePaddingBottom}`}>
-              {children}
-            </div>
+            {children}
           </main>
         </div>
       </body>

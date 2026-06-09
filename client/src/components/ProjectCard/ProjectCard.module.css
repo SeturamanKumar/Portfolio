@@ -1,94 +1,61 @@
 .card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    backdrop-filter: blur(10px);
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s, background 0.3s;
+}
+.card:hover { border-color: var(--border-hover); background: var(--surface-2); }
+
+.cardTop { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.3);
+.title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 300;
+  color: var(--text);
+  letter-spacing: -0.01em;
 }
 
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
+.badge {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem; flex-shrink: 0;
+}
+.badge_live        { color: var(--accent); border: 1px solid var(--accent-dim); background: var(--accent-dim); }
+.badge_research    { color: var(--text-muted); border: 1px solid var(--border); }
+.badge_in_progress { color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); background: rgba(245,158,11,0.08); }
+
+.tagline {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.04em;
 }
 
-.projectTitle {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fff;
-}
+.desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.72; }
 
-.statusBadge {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.statusBadge[data-status="Live"] {
-    background: rgba(34, 197, 94, 0.1);
-    color: #4ade80;
-    border: 1px solid rgba(34, 197, 94, 0.2);
-}
-
-.statusBadge[data-status="In Progress"] {
-    background: rgba(234, 179, 94, 0.1);
-    color: #facc15;
-    border: 1px solid rgba(34, 179, 8, 0.2);
-}
-
-.description {
-    color: #ccc;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    flex-grow: 1;
-}
-
-
-.techStack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
+.tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .tag {
-    background: rgba(255, 255, 255, 0.05);
-    color: #a0a0a0;
-    padding: 0.25rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--ff-mono);
+  font-size: 0.62rem; letter-spacing: 0.1em;
+  color: var(--text-muted); padding: 0.3rem 0.65rem;
+  border: 1px solid var(--border);
 }
 
-.links {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
+.links { display: flex; gap: 1.2rem; margin-top: 0.2rem; }
 .link {
-    color: #fff;
-    font-size: 0.95rem;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.4s ease;
+  font-family: var(--ff-mono);
+  font-size: 0.7rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-mid);
+  transition: color 0.2s;
 }
-
-.link:hover {
-    color: #4ade80;
-    text-decoration: underline;
-}
+.link:hover { color: var(--accent); }

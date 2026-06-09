@@ -1,0 +1,133 @@
+.section {
+  margin-top: 3rem;
+  padding: 6rem 2rem 8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 860px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* center all children */
+  text-align: center;
+  gap: 3rem;
+}
+
+.eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.name {
+  font-family: var(--ff-display);
+  font-size: clamp(3rem, 7.5vw, 6.5rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.tagline {
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 500px;
+}
+
+.accent { color: var(--accent); }
+
+/* Stats */
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.statVal {
+  font-family: var(--ff-mono);
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mid);    /* readable */
+}
+
+.divider {
+  width: 1px; height: 2.4rem;
+  background: var(--border-hover);
+  flex-shrink: 0;
+}
+
+/* Roadmap section — full width */
+.roadmapWrap {
+  width: 100%;
+  text-align: left;
+}
+
+/* CTAs */
+.ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 0.85rem 2rem;
+  transition: opacity 0.25s;
+}
+.btnPrimary:hover { opacity: 0.82; }
+
+.btnSecondary {
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  border: 1px solid var(--border-hover);
+  padding: 0.85rem 2rem;
+  transition: border-color 0.25s, color 0.25s;
+}
+.btnSecondary:hover { border-color: var(--accent); color: var(--accent); }
+
+@media (max-width: 768px) {
+  .section { padding: 4rem 1.5rem 5rem; }
+  .stats { gap: 1.4rem; }
+  .divider { display: none; }
+  .container { gap: 2.2rem; }
+}

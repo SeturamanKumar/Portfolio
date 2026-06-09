@@ -1,9 +1,5 @@
-import ProjectsMe from "@/components/ProjectsMe/ProjectsMe"
+import ProjectsMe from "@/components/ProjectsMe/ProjectsMe";
 
-export default function Projects(){
-    return(
-        <main>
-            <ProjectsMe />
-        </main>
-    )
+export default function ProjectsPage() {
+  return <ProjectsMe />;
 }

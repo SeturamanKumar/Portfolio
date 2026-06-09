@@ -1,157 +1,119 @@
-.section {
-    min-height: 100vh;
-    padding: 4rem 1.5rem;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    box-sizing: border-box;
+.page {
+  padding-bottom: 8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  max-width: 860px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  padding-top: 4rem;
 }
 
 .heading {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: #fff;
-    line-height: 1.2;
+  font-family: var(--ff-display);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
-.textBlock {
-    color: #a0a0a0;
-    font-size: 1.125rem;
-    line-height: 1.8;
-    width: 100%;
+.bio {
+  font-size: 1rem;
+  color: var(--text-mid);
+  line-height: 1.8;
+  max-width: 640px;
 }
 
-.bentoGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: minmax(180px, auto);
-    margin: 2rem 0;
-    gap: 1rem;
-    width: 100%;
+/* Blocks */
+.block { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.blockLabel {
+  font-family: var(--ff-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-mid);
 }
 
-.bentoBox {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 1.25rem;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s ease;
-    min-height: 180px;
-    overflow: hidden;
+/* Chips */
+.chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+.chip {
+  font-family: var(--ff-body);
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.2s, color 0.2s;
+}
+.chip:hover { border-color: var(--border-hover); color: var(--text); }
+.chipMono { font-family: var(--ff-mono); font-size: 0.76rem; }
+
+/* Skills grid — 3 even columns */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
 }
 
-.bentoBox:hover {
-    background: rgba(255, 255, 255, 0.06);
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.2);
+/* Expandable section */
+.expandGrid {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding-top: 0;
+  /* slower + padding-top transitions so the gap appears smoothly */
+  transition:
+    max-height 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity    0.55s ease 0.12s,
+    padding-top 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.boxTitle {
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-    color: #888;
-    margin-bottom: 0.5rem;
+.expandGrid.open {
+  max-height: 1200px;
+  opacity: 1;
+  padding-top: 0.6rem;    /* matches grid gap — seamless continuation */
 }
+/* The inner grid inside expandGrid */
+.expandGrid .grid { margin-top: 0; }
 
-.boxValue {
-    font-size: 1rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.75);
-    margin-top: auto;
-    word-break: break-word;
+/* Expand button */
+.expandBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  background: none;
+  border: 1px solid var(--border);
+  padding: 0.65rem 1.2rem;
+  color: var(--text-mid);
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  transition: border-color 0.25s, color 0.25s;
 }
+.expandBtn:hover { border-color: var(--border-hover); color: var(--text); }
 
-.tagContainer {
-    display: flex;
-    flex-wrap: wrap;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: space-around;
-    gap: 1rem;
+.chevronDown, .chevronUp {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
 }
+.chevronUp { transform: rotate(180deg); }
 
-.tag {
-    color: rgba(255, 255, 255, 0.75);
-    padding: 0;
-    font-size: 1rem;
-    font-weight: 600;
-    white-space: nowrap;
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
 }
-
-.list {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 250px;
-    justify-content: space-evenly;
-    padding-top: 1rem;
-}
-
-.listItems {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.75);
-    word-break: break-word;
-}
-
-.wide {
-    grid-column: span 2;
-}
-
-.tall {
-    grid-row: span 2;
-}
-
 @media (max-width: 768px) {
-    .mobileHidden {
-        display: none !important;
-    }
-
-    .bentoGrid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .tall {
-        grid-row: auto;
-        grid-column: auto;
-    }
+  .page { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .inner { padding-top: 2.5rem; gap: 2.5rem; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
 }
-
-@media (min-width:768px) and (max-width: 1024px) {
-    .optional {
-        display: none !important;
-    }
-
-    .bentoGrid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .wide, .tall {
-        grid-column: span 1;
-        grid-row: auto;
-        width: 100%;
-    }
-
-    .list {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        align-items: center;
-        gap: 2.5rem;
-    }
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
 }
