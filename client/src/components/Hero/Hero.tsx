@@ -36,13 +36,16 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Contact CTA — sits between hero text and the marquee below */}
         <div className={styles.ctaWrap}>
+          <Link href="/projects" className={styles.projectsBtn}>
+            View Projects
+          </Link>
           <Link href="/contact" className={styles.contactBtn}>
             Get in Touch
           </Link>
         </div>
       </div>
+
       <div className={styles.marqueeWrap}>
         <TechMarquee />
       </div>

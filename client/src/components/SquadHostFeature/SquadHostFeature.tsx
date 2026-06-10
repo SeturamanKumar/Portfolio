@@ -1,9 +1,32 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import styles from "./SquadHostFeature.module.css";
 import RoadmapTimeline from "@/components/RoadmapTimeline/RoadmapTimeline";
 
+const stats = [
+  { value: "~$0.06", label: "per session" },
+  { value: "$0.00",  label: "when idle" },
+  { value: "8 min",  label: "auto-shutdown" },
+  { value: "10–15m", label: "to deploy" },
+];
+
 export default function SquadHostFeature() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const els = sectionRef.current?.querySelectorAll(".reveal");
+    if (!els) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } }),
+      { threshold: 0.08 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <section className={styles.section}>
+    <section className={styles.section} ref={sectionRef}>
       <div className={styles.container}>
 
         <p className={`${styles.eyebrow} reveal`}>Featured Project</p>
@@ -18,25 +41,15 @@ export default function SquadHostFeature() {
         </div>
 
         <div className={`${styles.stats} reveal reveal-delay-2`}>
-          <div className={styles.stat}>
-            <span className={styles.statVal}>~$0.06</span>
-            <span className={styles.statLabel}>per 2 hr session</span>
-          </div>
-          <div className={styles.divider} aria-hidden="true" />
-          <div className={styles.stat}>
-            <span className={styles.statVal}>$0.00</span>
-            <span className={styles.statLabel}>when idle</span>
-          </div>
-          <div className={styles.divider} aria-hidden="true" />
-          <div className={styles.stat}>
-            <span className={styles.statVal}>8 min</span>
-            <span className={styles.statLabel}>auto-shutdown</span>
-          </div>
-          <div className={styles.divider} aria-hidden="true" />
-          <div className={styles.stat}>
-            <span className={styles.statVal}>10–15 min</span>
-            <span className={styles.statLabel}>to deploy</span>
-          </div>
+          {stats.map((s, i) => (
+            <div key={s.label} className={styles.statGroup}>
+              {i > 0 && <div className={styles.divider} aria-hidden="true" />}
+              <div className={styles.stat}>
+                <span className={styles.statVal}>{s.value}</span>
+                <span className={styles.statLabel}>{s.label}</span>
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className={`reveal reveal-delay-3`}>

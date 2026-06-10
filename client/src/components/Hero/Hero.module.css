@@ -73,25 +73,43 @@
 
 .sep { font-size: 0.7rem; color: var(--border-hover); }
 
-/* CTA */
+/* CTA row */
 .ctaWrap {
   overflow: hidden;
   margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
+.projectsBtn,
 .contactBtn {
   display: inline-block;
   font-family: var(--ff-mono);
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text);
-  border: 1px solid var(--border-hover);
   padding: 0.9rem 2.6rem;
   opacity: 0;
   transform: translateY(100%);
   animation: driftUp 0.85s cubic-bezier(0.16,1,0.3,1) 0.82s forwards;
   transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+
+.projectsBtn {
+  color: var(--bg);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+}
+.projectsBtn:hover {
+  opacity: 0.82;
+}
+
+.contactBtn {
+  color: var(--text);
+  border: 1px solid var(--border-hover);
+  background: transparent;
 }
 .contactBtn:hover {
   border-color: var(--accent);
@@ -104,6 +122,7 @@
   left: 0;
   width: 100%;
 }
+
 /* Keyframes */
 @keyframes driftUp {
   to { opacity: 1; transform: translateY(0); }
@@ -112,6 +131,6 @@
 /* Mobile */
 @media (max-width: 768px) {
   .hero { padding: 3rem 1.5rem 4rem; }
-  .decorLine, .decorLine2 { display: none; }
   .meta { gap: 0.45rem; }
+  .ctaWrap { flex-direction: column; align-items: flex-start; }
 }

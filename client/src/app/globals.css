@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap');
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  /* Old theme colours, mapped to the variables the new components expect */
   --bg: #111;
   --surface: #1a1a1a;
   --surface-2: #222;
@@ -10,16 +11,21 @@
   --text: #eee;
   --text-muted: #888;
   --text-mid: #aaa;
-  --accent: #fff;                     /* old accent was white */
+  --accent: #fff;
   --accent-dim: rgba(255,255,255,0.1);
   --accent-glow: rgba(255,255,255,0.18);
-  --nav-h: 0px;                      /* no top navbar */
-  --ff-display: Arial, sans-serif;
-  --ff-mono: monospace;
-  --ff-body: Arial, sans-serif;
+  --nav-h: 0px;
+
+  /* Updated fonts */
+  --ff-display: 'Fraunces', Georgia, serif;
+  --ff-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --ff-mono: 'Inter', monospace;
 }
 
-html { font-size: 16px; }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--bg);
@@ -28,16 +34,20 @@ body {
   font-weight: 300;
   line-height: 1.65;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar (fixed from old) */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--text-muted); }
 
 a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: inherit; }
 
-/* Reveal animation classes (needed by RevealObserver) */
+/* Reveal animation classes */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -55,5 +65,5 @@ a { color: inherit; text-decoration: none; }
 .reveal-delay-4 { transition-delay: 0.50s; }
 .reveal-delay-5 { transition-delay: 0.65s; }
 
-/* Page wrapper (used by new components) */
+/* Page wrapper */
 .page { padding-top: var(--nav-h); min-height: 100vh; }
