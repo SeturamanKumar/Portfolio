@@ -7,3 +7,9 @@ variable "recipient_email" {
   description = "Email address that receives contact from messages."
   type        = string
 }
+
+variable "recaptcha_secret_key" {
+  description = "Google reCAPTCHA v3 secret key bot verification in Lambda."
+  type        = string
+  sensitive   = true
+}

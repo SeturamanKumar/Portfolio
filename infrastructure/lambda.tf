@@ -16,10 +16,14 @@ resource "aws_lambda_function" "contact" {
   filename         = data.archive_file.lambda_placeholder.output_path
   source_code_hash = data.archive_file.lambda_placeholder.output_base64sha256
 
+  timeout     = 10
+  memory_size = 128
+
   environment {
     variables = {
-      SENDER_EMAIL    = var.sender_email
-      RECIPIENT_EMAIL = var.recipient_email
+      SENDER_EMAIL         = var.sender_email
+      RECIPIENT_EMAIL      = var.recipient_email
+      RECAPTCHA_SECRET_KEY = var.recaptcha_secret_key
     }
   }
 
