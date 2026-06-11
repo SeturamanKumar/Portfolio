@@ -11,7 +11,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;   /* center everything including button */
+  align-items: center;
   gap: 3rem;
   padding-top: 4rem;
 }
@@ -65,7 +65,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center;   /* center all fields + button */
+  align-items: center;
   gap: 1.6rem;
   width: 100%;
 }
@@ -113,6 +113,39 @@
 }
 .submit:hover:not(:disabled) { opacity: 0.82; }
 .submit:disabled { opacity: 0.5; }
+
+.errorMessage {
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: #ef4444;
+  text-align: center;
+  margin-top: -0.6rem;
+}
+
+.recaptchaDisclosure {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -0.8rem;
+}
+
+.recaptchaDisclosure a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.recaptchaDisclosure a:hover {
+  color: var(--text);
+}
+
+:global(.grecaptcha-badge) {
+  visibility: hidden !important;
+}
 
 /* Toast */
 .toast {

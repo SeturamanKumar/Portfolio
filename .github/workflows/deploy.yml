@@ -44,7 +44,8 @@ jobs:
         run: |
           terraform apply -auto-approve \
             -var="sender_email=${{ secrets.SENDER_EMAIL }}" \
-            -var="recipient_email=${{ secrets.RECIPIENT_EMAIL }}"
+            -var="recipient_email=${{ secrets.RECIPIENT_EMAIL }}" \
+            -var="recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}"
 
       - name: Capture Terraform outputs
         id: tf_outputs
@@ -85,6 +86,7 @@ jobs:
         working-directory: client
         env:
           NEXT_PUBLIC_API_URL: ${{ needs.terraform.outputs.api_gateway_url }}
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }
         run: npm run build
 
       - name: Sync to S3
@@ -110,10 +112,15 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Package Lambda Function
-        run: zip -j lambda.zip lambda/handler.py
+        run: |
+          pip install -r lambda/requirments.txt -t lambda/package/ --quiet
+          cp lambda/handler.py lambda/package/
+          cd lambda/package && zip -r ../../lambda.zip .
 
       - name: Deploy Lambda Function
         run: |
           aws lambda update-function-code \
             --function-name ${{ needs.terraform.outputs.lambda_function_name }} \
             --zip-file fileb://lambda.zip
+          aws lambda wait function-updated \
+            --function-name ${{ needs.terraform.outputs.lambda_function_name }}
