@@ -44,7 +44,7 @@ resource "aws_cloudfront_distribution" "frontend" {
     }
 
     min_ttl     = 0
-    default_ttl = 3600
+    default_ttl = 21600
     max_ttl     = 86400
   }
 

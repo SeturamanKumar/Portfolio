@@ -45,7 +45,9 @@ jobs:
           terraform apply -auto-approve \
             -var="sender_email=${{ secrets.SENDER_EMAIL }}" \
             -var="recipient_email=${{ secrets.RECIPIENT_EMAIL }}" \
-            -var="recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}"
+            -var="recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}" \
+            -var="cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -var="cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}"
 
       - name: Capture Terraform outputs
         id: tf_outputs
@@ -85,7 +87,7 @@ jobs:
       - name: Build Next.js static export
         working-directory: client
         env:
-          NEXT_PUBLIC_API_URL: ${{ needs.terraform.outputs.api_gateway_url }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
         run: npm run build
 

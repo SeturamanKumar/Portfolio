@@ -1,3 +1,4 @@
+# This route is for now debugging
 output "api_gateway_url" {
   description = "Base URL for API Gateway. Set as NEXT_PUBLIC_API_URL in Github secrets."
   value       = trimsuffix(aws_apigatewayv2_stage.default.invoke_url, "/")
@@ -21,4 +22,9 @@ output "cloudfront_domain" {
 output "cloudfront_distribution_id" {
   description = "CloudFront distribution ID for cache invalidation."
   value       = aws_cloudfront_distribution.frontend.id
+}
+
+output "api_custom_domain" {
+  description = "API Gateway regional domain name. Used as CNAME target in Cloudflare for api.seturaman.me"
+  value       = aws_apigatewayv2_domain_name.api.domain_name_configuration[0].target_domain_name
 }

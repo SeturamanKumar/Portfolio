@@ -13,3 +13,14 @@ variable "recaptcha_secret_key" {
   type        = string
   sensitive   = true
 }
+
+variable "cloudflare_api_token" {
+  description = "Cloudflare API token with DNS edit permissions for seturaman.me zone."
+  type        = string
+  sensitive   = true
+}
+
+variable "cloudflare_zone_id" {
+  description = "Cloudflare Zone ID for seturaman.me"
+  type        = string
+}
