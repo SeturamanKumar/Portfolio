@@ -1,6 +1,6 @@
 output "api_gateway_url" {
   description = "Base URL for API Gateway. Set as NEXT_PUBLIC_API_URL in Github secrets."
-  value       = aws_apigatewayv2_stage.default.invoke_url
+  value       = trimsuffix(aws_apigatewayv2_stage.default.invoke_url, "/")
 }
 
 output "s3_bucket_name" {
