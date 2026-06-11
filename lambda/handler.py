@@ -81,7 +81,7 @@ def handler(event, context):
     name = body.get('name', '').strip()
     email = body.get('email', '').strip()
     message = body.get('message', '').strip()
-    recaptcha_token = bode.get('recaptcha_token', '').strip()
+    recaptcha_token = body.get('recaptcha_token', '').strip()
 
     if not name or not email or not message or not recaptcha_token:
         return _response(400, {'error': 'All fields are requireds'})
