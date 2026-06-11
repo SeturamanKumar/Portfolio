@@ -130,31 +130,31 @@ def handler(event, context):
             ReplyToAddresses=[email]
         )
         # Email 2 - A copy sent to the person who filled the form
-        ses.send_email(
-            Source=sender,
-            Destination={
-                'ToAddresses': [email]
-            },
-            Message={
-                'Subject': {
-                    'Data': 'Thanks for reaching out!'
-                },
-                'Body': {
-                    'Text': {
-                        'Data': (
-                            f'Hi {name}, \n\n'
-                            f'Thanks for getting in touch.'
-                            f'I\'ve recieved your message and will get back to you soon.\n\n'
-                            f'Here\'s a copy of what you sent:\n\n'
-                            f'"{message}"'
-                            f'Best,'
-                            f'Seturaman Kumar'
-                        )
-                    }
-                }
-            }
-        )
-
+        # ses.send_email(
+        #     Source=sender,
+        #     Destination={
+        #         'ToAddresses': [email]
+        #     },
+        #     Message={
+        #         'Subject': {
+        #             'Data': 'Thanks for reaching out!'
+        #         },
+        #         'Body': {
+        #             'Text': {
+        #                 'Data': (
+        #                     f'Hi {name}, \n\n'
+        #                     f'Thanks for getting in touch.'
+        #                     f'I\'ve recieved your message and will get back to you soon.\n\n'
+        #                     f'Here\'s a copy of what you sent:\n\n'
+        #                     f'"{message}"'
+        #                     f'Best,'
+        #                     f'Seturaman Kumar'
+        #                 )
+        #             }
+        #         }
+        #     }
+        # )
+        #
         return _response(200, {'message': 'Email Sent Successfully'})
 
     except ClientError as e:
