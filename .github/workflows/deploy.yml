@@ -86,7 +86,7 @@ jobs:
         working-directory: client
         env:
           NEXT_PUBLIC_API_URL: ${{ needs.terraform.outputs.api_gateway_url }}
-          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
         run: npm run build
 
       - name: Sync to S3
@@ -113,7 +113,7 @@ jobs:
 
       - name: Package Lambda Function
         run: |
-          pip install -r lambda/requirments.txt -t lambda/package/ --quiet
+          pip install -r lambda/requirements.txt -t lambda/package/ --quiet
           cp lambda/handler.py lambda/package/
           cd lambda/package && zip -r ../../lambda.zip .
 

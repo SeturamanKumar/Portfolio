@@ -46,7 +46,7 @@ export default function ContactMe() {
     try {
       const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
       const recaptcha_token = await new Promise<string>((resolve, reject) => {
-        window.grecaptcha.readyu(() => {
+        window.grecaptcha.ready(() => {
           window.grecaptcha.execute(siteKey!, { action: 'contact_form'}).then(resolve).catch(reject)
         });
       });
