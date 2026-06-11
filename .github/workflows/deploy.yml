@@ -64,16 +64,28 @@ jobs:
         working-directory: infrastructure
         run: terraform init
 
-      - name: Terraform Apply
+      - name: Terraform Format Check
+        working-directory: infrastructure
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        working-directory: infrastructure
+        run: terraform validate
+
+      - name: Terraform Plan
         working-directory: infrastructure
         run: |
-          terraform apply -auto-approve \
-            -var="sender_email=${{ secrets.SENDER_EMAIL }}" \
-            -var="recipient_email=${{ secrets.RECIPIENT_EMAIL }}" \
-            -var="recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}" \
-            -var="cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" \
-            -var="cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" \
-            -var="aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}"
+          terraform plan -out=tfplan \
+          -var="sender_email=${{ secrets.SENDER_EMAIL }}" \
+          -var="recipient_email=${{ secrets.RECIPIENT_EMAIL }}" \
+          -var="recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}" \
+          -var="cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+          -var="cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" \
+          -var="aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}"
+
+      - name: Terraform Apply
+        working-directory: infrastructure
+        run: terraform apply -auto-approve tfplan
 
   deploy-lambda:
 
