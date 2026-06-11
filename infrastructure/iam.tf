@@ -24,7 +24,7 @@ resource "aws_iam_policy" "lambda_ses" {
     Statement = [{
       Effect   = "Allow"
       Action   = "ses:SendEmail"
-      Resource = "*"
+      Resource = "arn:aws:ses:ap-south-1:${var.aws_account_id}:identity/seturaman.me"
     }]
   })
 }

@@ -24,3 +24,9 @@ variable "cloudflare_zone_id" {
   description = "Cloudflare Zone ID for seturaman.me"
   type        = string
 }
+
+variable "aws_account_id" {
+  description = "AWS account ID used for scoping IAM policy resources"
+  type        = string
+  sensitive   = true
+}
