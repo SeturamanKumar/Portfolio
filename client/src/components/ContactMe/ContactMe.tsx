@@ -193,3 +193,4 @@ declare global {
     };
   }
 }
+// Pipeline trigger
