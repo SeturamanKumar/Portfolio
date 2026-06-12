@@ -193,4 +193,3 @@ declare global {
     };
   }
 }
-// trigger full pipeline test
