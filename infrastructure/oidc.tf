@@ -40,7 +40,8 @@ resource "aws_iam_policy" "github_actions_s3" {
           "s3:PutObject",
           "s3:DeleteObject",
           "s3:GetObject",
-          "s3:ListBucket"
+          "s3:ListBucket",
+          "s3:GetBucketPolicy"
         ]
         Resource = [
           "arn:aws:s3:::seturaman-portfolio-frontend",
@@ -93,7 +94,8 @@ resource "aws_iam_policy" "github_actions_lambda" {
       Action = [
         "lambda:UpdateFunctionCode",
         "lambda:GetFunction",
-        "lambda:GetFunctionConfiguration"
+        "lambda:GetFunctionConfiguration",
+        "lambda:GetFunctionCodeSigningConfig"
       ]
       Resource = "arn:aws:lambda:${var.aws_region}:${var.aws_account_id}:function:portfolio-contact"
     }]
