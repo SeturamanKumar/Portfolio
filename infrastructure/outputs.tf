@@ -28,3 +28,8 @@ output "api_custom_domain" {
   description = "API Gateway regional domain name. Used as CNAME target in Cloudflare for api.seturaman.me"
   value       = aws_apigatewayv2_domain_name.api.domain_name_configuration[0].target_domain_name
 }
+
+output "github_actions_role_arn" {
+  description = "IAM role ARN for GitHub Actions OIDC. Add as AWS_GITHUB_ACTIONS_ROLE_ARN in GitHub secrets."
+  value       = aws_iam_role.github_actions
+}

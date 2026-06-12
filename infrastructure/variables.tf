@@ -30,3 +30,14 @@ variable "aws_account_id" {
   type        = string
   sensitive   = true
 }
+
+variable "github_repo" {
+  description = "GitHub repository in owner/repo format. Used to scope OIDC trust policy to this repo only."
+  type        = string
+}
+
+variable "aws_region" {
+  description = "AWS region used for scoping IAM policy resource ARNs."
+  type        = string
+  default     = "ap-south-1"
+}
