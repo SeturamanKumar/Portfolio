@@ -2,6 +2,7 @@
 output "api_gateway_url" {
   description = "Base URL for API Gateway. Set as NEXT_PUBLIC_API_URL in Github secrets."
   value       = trimsuffix(aws_apigatewayv2_stage.default.invoke_url, "/")
+  sensitive   = true
 }
 
 output "s3_bucket_name" {
@@ -31,5 +32,6 @@ output "api_custom_domain" {
 
 output "github_actions_role_arn" {
   description = "IAM role ARN for GitHub Actions OIDC. Add as AWS_GITHUB_ACTIONS_ROLE_ARN in GitHub secrets."
-  value       = aws_iam_role.github_actions
+  value       = aws_iam_role.github_actions.arn
+  sensitive   = true
 }
