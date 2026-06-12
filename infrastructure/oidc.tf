@@ -41,7 +41,20 @@ resource "aws_iam_policy" "github_actions_s3" {
           "s3:DeleteObject",
           "s3:GetObject",
           "s3:ListBucket",
-          "s3:GetBucketPolicy"
+          "s3:GetBucketPolicy",
+          "s3:GetBucketAcl",
+          "s3:GetBucketCORS",
+          "s3:GetBucketWebsite",
+          "s3:GetBucketVersioning",
+          "s3:GetBucketLogging",
+          "s3:GetBucketTagging",
+          "s3:GetBucketRequestPayment",
+          "s3:GetEncryptionConfiguration",
+          "s3:GetLifecycleConfiguration",
+          "s3:GetReplicationConfiguration",
+          "s3:GetAccelerateConfiguration",
+          "s3:GetBucketObjectLockConfiguration",
+          "s3:GetBucketPublicAccessBlock"
         ]
         Resource = [
           "arn:aws:s3:::seturaman-portfolio-frontend",
